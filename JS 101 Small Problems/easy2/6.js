@@ -6,16 +6,18 @@ function penultimate(string) {
 console.log(penultimate("last word") === "last"); // logs true
 console.log(penultimate("Launch School is great!") === "is"); // logs true
 
-/* Further exploration: Suppose we need a function that retrieves the middle word of a 
-phrase/sentence. What edge cases need to be considered? 
-How would you handle those edge cases without ignoring them? 
-Write a function that returns the middle word of a phrase or sentence. 
-It should handle all of the edge cases you thought of. 
+/* 
+** Further exploration: Suppose we need a function that retrieves the middle word of a
+** phrase/sentence. What edge cases need to be considered?
+** How would you handle those edge cases without ignoring them?
+** Write a function that returns the middle word of a phrase or sentence.
+** It should handle all of the edge cases you thought of.
 
-> edge cases: string that contains only white space
-              string with one word
-              string with no words
-              string that is even length with no middle character */ 
+** edge cases: string that contains only white space
+**             string with one word
+**             string with no words
+**             string that is even length with no middle character
+*/ 
 
 
 function middleOfPhrase(string) {

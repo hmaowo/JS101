@@ -24,7 +24,8 @@ console.log(multisum(5));       // 8
 console.log(multisum(10));      // 33
 console.log(multisum(1000));    // 234168
 
-/* launch school solution 
+/* 
+** launch school solution
 
 function isMultiple(number, divisor) {
   return number % divisor === 0;
@@ -40,4 +41,7 @@ function multisum(maxValue) {
   }
 
   return sum;
-} */ 
+} 
+
+** Use % to sort whether a number is a factor, because factors are divisible by the divisor ( 3 or 5).
+*/ 

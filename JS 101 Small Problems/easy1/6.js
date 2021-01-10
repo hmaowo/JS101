@@ -20,9 +20,12 @@ if (answer === 's') {
 };
 
 
-/* What if the input was an array of integers instead of just a single integer? 
-How would your computeSum and computeProduct functions change? 
-Given that the input is an array, how might you make use of the Array.prototype.reduce() method? */
+/* 
+** Further Exploration: 
+** What if the input was an array of integers instead of just a single integer?
+** How would your computeSum and computeProduct functions change?
+** Given that the input is an array, how might you make use of the Array.prototype.reduce() method? 
+*/
 
 let input = rlSync.question(`Please enter an array of integers greater than 0, separated by \
 a single empty space. Do not enclose the integers in brackets. Please folow these guidelines, \
@@ -50,3 +53,4 @@ if (array.includes(NaN)) {
     console.log("Oops. Unknown operation.");
   }
 }
+

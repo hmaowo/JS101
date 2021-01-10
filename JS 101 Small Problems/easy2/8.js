@@ -1,6 +1,4 @@
-//returns every other element of the array
-// map returns a new array that contains one element for each element in numbers.
-
+// returns every other element of the array.
 
 function oddities(array) {
   let newArray = [];
@@ -17,11 +15,12 @@ console.log(oddities(["abc", "def"])); // logs ['abc']
 console.log(oddities([123])); // logs [123]
 console.log(oddities([])); // logs []
 
-/* Further exploration
-Try to solve this exercise in a different way. Using the array iteration methods. */
+/* 
+** Further exploration
+** Try to solve this exercise in a different way. Using the array iteration methods. 
+*/
 
 /*
-
 //using for each
 function oddities (array) {
   let filteredArray = [];
@@ -58,6 +57,4 @@ function oddities (array) {
   });
   return newArray;
 }
-
-*/
-
+*/ 

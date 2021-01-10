@@ -11,4 +11,4 @@ console.log(`==> ${num1} / ${num2} = ${Math.floor(num1 / num2)}`); //prob should
 console.log(`==> ${num1} % ${num2} = ${num1 % num2}`);
 console.log(`==> ${num1} ** ${num2} = ${Math.pow(num1, num2)}`);
 
-/* edge cases to consider: second number cannot be 0 */ 
+// edge cases to consider: second number cannot be 0 

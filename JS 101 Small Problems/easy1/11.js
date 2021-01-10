@@ -1,5 +1,7 @@
-// use String.prototype.charCodeAt() to determine ASCII value of a character
-// ASCII string value is sum of ASCII value of every character in the string. 
+/*
+** use String.prototype.charCodeAt() to determine ASCII value of a character
+** ASCII string value is sum of ASCII value of every character in the string.
+*/
 
 function asciiValue(string) {
   let value = 0; 

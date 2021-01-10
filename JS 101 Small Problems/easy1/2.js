@@ -10,9 +10,11 @@ for (let number = 1; number < 100; number += 2) {
   console.log(number);
 }
 
-/* Further exploration Repeat this exercise with a technique different from the one that you used,
-and different from the one provided. Also consider adding a way for the user to specify the
- limits of the odd numbers logged to the console. */
+/* 
+** Further exploration Repeat this exercise with a technique different from the one that you used,
+** and different from the one provided. Also consider adding a way for the user to specify the
+** limits of the odd numbers logged to the console. 
+*/
 
 let rlSync = require('readline-sync');
 console.log(`This program logs the odd numbers between two numbers, inclusive. The numbers you \

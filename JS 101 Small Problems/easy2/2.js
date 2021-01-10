@@ -8,11 +8,12 @@ if (name.charAt(name.length - 1) === '!') {
   console.log(`Hello, ${name}.`);
 }
 
-/* Notes
-
-line 4  or use bracket notation name[name.length -1]
-line 5  name = name.slice(0, -1)
-        negative number like - 1 is treated as str.length - 1
-        You cannnot modify length of string like arrays. But you can reassign the reference
-        to a new string value.  
+/* 
+** Notes
+**
+** line 4   or use bracket notation name[name.length -1]
+** line 5   name = name.slice(0, -1)
+**          Negative number like - 1 is treated as str.length - 1.
+**          You cannnot modify length of string like arrays. But you can reassign the reference
+**          to a new string value.
 */
