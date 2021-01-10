@@ -10,6 +10,7 @@ function oddities(array) {
   return newArray;
 }
 
+
 console.log(oddities([2, 3, 4, 5, 6])); // logs [2, 4, 6]
 console.log(oddities([1, 2, 3, 4, 5, 6])); // logs [1, 3, 5]
 console.log(oddities(["abc", "def"])); // logs ['abc']
@@ -26,7 +27,7 @@ function oddities (array) {
   let filteredArray = [];
   array.forEach(function (element, index) {
     if (index % 2 === 0) {
-      filteredArray.push(element);
+      filteredArray.push(element); // can also be written as filteredArray.push(array[index]);
     }
   });
   return filteredArray;
