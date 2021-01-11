@@ -5,7 +5,7 @@ console.log(stringToSignedInteger("+100") === 100); // logs true
 function stringToSignedInteger(string) {
   if (string.includes("-")) {
     string = string.replace("-", "");
-    return - stringToInteger(string);
+    return - stringToInteger(string); //return -number
   } else if (string.includes("+")){
     string = string.replace("+", "");
     return stringToInteger(string); 

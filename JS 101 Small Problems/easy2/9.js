@@ -23,7 +23,7 @@ function stringToInteger (string) {
 ** Use digits stored as strings to look up corresponding numeric values. 
 
 function stringToInteger(string) {
-  const DIGITS = {
+  const DIGITS = { //object keys(property names) are always strings. 
     0: 0,
     1: 1,
     2: 2,
