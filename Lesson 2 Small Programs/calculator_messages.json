@@ -1,0 +1,14 @@
+{
+  "en": {
+    "welcome" : "Welcome to Calculator!", 
+    "number1" : "What's the first number?", 
+    "number2" : "What's the second number?",
+    "invalid" : "Hmm... that doesn't look like a valid number."
+  }, 
+  "es": {
+    "welcome" : "Bienvenido a la calculadora! Entre su nombre:",
+    "number1" : "¿Cuál es el primer número?",
+    "number2" : "¿Cuál es el segundo número?", 
+    "invalid" : "Hmm ... eso no parece un número válido."
+  }
+}

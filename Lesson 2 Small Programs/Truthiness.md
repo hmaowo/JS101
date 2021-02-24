@@ -1,4 +1,4 @@
-**Truth or False**
+*Truth or False**
 
 - helps build conditional logic
 - understand the state of an object or expression

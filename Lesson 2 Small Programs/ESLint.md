@@ -1,0 +1,4 @@
+```
+npx eslint file.js
+```
+
