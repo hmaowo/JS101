@@ -17,6 +17,14 @@ NaN
 
 **NaN**: is a type of number but it isn't a meaningful number. It represents a number that cannot be represented. 
 
+**Number.isNaN()**:  method determines whether the passed value is [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) and its type is [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number). It is a more robust version of the original, global [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN).
+
+- Due to both equality operators, [`==`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#equality) and [`===`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#identity), evaluating to `false` when checking if [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) *is* [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN), the function `Number.isNaN()` has become necessary. This situation is unlike all other possible value comparisons in JavaScript.
+- In comparison to the global [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN) function, `Number.isNaN()` doesn't suffer the problem of forcefully converting the parameter to a number. 
+  - This means it is now safe to pass values that would normally convert to [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN), but aren't actually the same value as NaN
+  -  This also means that only values of the type number, that are also [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN), return `true`.
+    - so you can pass in "" and it won't return true because its not a type number. 
+
 ```node
 # converting empty string 
 > Number('')
