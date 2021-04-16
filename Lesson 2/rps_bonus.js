@@ -117,7 +117,7 @@ function displayRoundScore() {
 }
 
 function displayGrandWinner() {
-  if (playerScore === WINS_NEEDE) {
+  if (playerScore === WINS_NEEED) {
     prompt(`You are the grand winner!`);
     return 'game over';
   } else if (computerScore === WINS_NEEDED) {
