@@ -27,7 +27,7 @@ const WINS_NEEDED = 5;
 let playerScore = 0;
 let computerScore = 0;
 
-rules();
+displayRules();
 
 while (true) {
 
@@ -37,29 +37,22 @@ while (true) {
     displayRoundWinner(playerChoice, computerChoice);
     trackScore(playerChoice, computerChoice);
     displayRoundScore();
-    let terminate = displayGrandWinner();
-    if (terminate === 'game over') break;
+    let gameOver = displayGrandWinner();
+    if (gameOver === 'game over') break;
   }
 
-  prompt("Would you like to play again y/n");
-  let answer = readline.question().toLowerCase();
-
-  while (answer[0] !== 'y' && answer[0] !== 'n') {
-    prompt("Please enter 'y' or 'n'");
-    answer = readline.question().toLowerCase();
-  }
+  let terminate = playAgain();
+  if (terminate[0] !== 'y') break;
 
   playerScore = 0;
   computerScore = 0;
-
-  if (answer[0] !== 'y') break;
 }
 
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function rules() {
+function displayRules() {
   prompt(`Welcome to Rock-Paper-Scissors-Spock-Lizard!`);
   prompt("You will be matched against a computer. Whoever reaches 5 wins first " +
     "is the grand winner.");
@@ -129,4 +122,16 @@ function displayGrandWinner() {
   } else {
     return 'game on';
   }
+}
+
+function playAgain() {
+  prompt("Would you like to play again y/n");
+  let answer = readline.question().toLowerCase();
+
+  while (answer[0] !== 'y' && answer[0] !== 'n') {
+    prompt("Please enter 'y' or 'n'");
+    answer = readline.question().toLowerCase();
+  }
+
+  return answer;
 }
