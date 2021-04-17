@@ -27,7 +27,7 @@ const WINS_NEEDED = 5;
 let playerScore = 0;
 let computerScore = 0;
 
-welcome();
+rules();
 
 while (true) {
 
@@ -59,7 +59,7 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
-function welcome() {
+function rules() {
   prompt(`Welcome to Rock-Paper-Scissors-Spock-Lizard!`);
   prompt("You will be matched against a computer. Whoever reaches 5 wins first " +
     "is the grand winner.");
@@ -70,11 +70,11 @@ function welcome() {
 
 function getPlayerChoice() {
   prompt(`Choose one: ${VALID_CHOICES.join(', ')}`);
-  let playerChoice = readline.question();
+  let playerChoice = readline.question().toLowerCase();
 
   while (!VALID_INPUT.includes(playerChoice)) {
     prompt("That's not a valid choice.");
-    playerChoice = readline.question();
+    playerChoice = readline.question().toLowerCase();
   }
 
   if (Object.keys(INPUT_MATCH).includes(playerChoice)) {
