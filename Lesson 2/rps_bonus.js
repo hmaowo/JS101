@@ -7,8 +7,9 @@
 
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock'];
-const VALID_INPUT = ['rock', 'paper', 'scissors', 'lizard', 'spock',
-  'r', 'p', 's', 'l', 'sp'];
+const VALID_INPUT = ['rock', 'paper', 'scissors', 'lizard', 'spock', 'r',
+  'p', 's', 'l', 'sp'];
+
 const WIN_CONDITIONS = {
   rock: ['scissors', 'lizard'],
   scissors: ['paper', 'lizard'],
@@ -16,6 +17,7 @@ const WIN_CONDITIONS = {
   spock: ['scissors', 'rock'],
   lizard: ['spock', 'paper'],
 };
+
 const INPUT_MATCH = {
   r: 'rock',
   s: 'scissors',
@@ -23,6 +25,7 @@ const INPUT_MATCH = {
   sp: 'spock',
   l: 'lizard',
 };
+
 const WINS_NEEDED = 5;
 let playerScore = 0;
 let computerScore = 0;
