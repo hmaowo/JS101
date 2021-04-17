@@ -27,12 +27,7 @@ const WINS_NEEDED = 5;
 let playerScore = 0;
 let computerScore = 0;
 
-prompt(`Welcome to Rock-Paper-Scissors-Spock-Lizard!`);
-prompt(`You will be matched against a computer. Whoever reaches 5 wins first \
-is the grand winner.`);
-prompt(`You may shorten your input by typing the first letter, such as 'r' for \
-'rock' or 's' for scissors'.`);
-prompt(`However, if you shorten 'spock' you must type 'sp'. \n `);
+welcome();
 
 while (true) {
 
@@ -62,6 +57,15 @@ while (true) {
 
 function prompt(message) {
   console.log(`=> ${message}`);
+}
+
+function welcome() {
+  prompt(`Welcome to Rock-Paper-Scissors-Spock-Lizard!`);
+  prompt("You will be matched against a computer. Whoever reaches 5 wins first " +
+    "is the grand winner.");
+  prompt("You may shorten your input by typing the first letter, such as 'r' " +
+    "for 'rock' or 's' for scissors'.");
+  prompt(`However, if you shorten 'spock' you must type 'sp'. \n `);
 }
 
 function getPlayerChoice() {
