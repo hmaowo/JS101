@@ -109,8 +109,7 @@ function trackScore(playerChoice, computerChoice) {
   if (whoWins(playerChoice, computerChoice)) {
     playerScore++;
   } else if (playerChoice === computerChoice) {
-    playerScore += 0;
-    computerScore += 0;
+    // do nothing
   } else {
     computerScore++;
   }
