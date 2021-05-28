@@ -69,22 +69,27 @@ numbers.sort((num1, num2) => num2 - num1);
 console.log(numbers); // [ 5, 4, 3, 2, 1 ]
 ```
 
-My solutions
+Solution 2
 
 ```js
 let numbers = [1, 2, 3, 4, 5];
-let reversed = numbers.slice().reverse(); //slice() returns a copy of array
-console.log(reversed);
+let reversedArray = numbers.slice().reverse(); //slice() returns a copy of array
+console.log(reversed); //[5, 4, 3, 2, 1]
 
 numbers = [1, 2, 3, 4, 5];
-numbers.
+reversedArray = (...numbers).sort((num1, num2) => num2 - num1);
+console.log(reversed); // // [5, 4, 3, 2, 1]
 ```
 
 **Bonus Question:** Can you do it using the `Array.prototype.forEach()` method?
 
-Hint
-
-Solution 2
+```js
+numbers = [1, 2, 3, 4, 5];
+let reversed = [];
+numbers.forEach((element) => {
+    reversed.unshift(element);
+});
+```
 
 ------
 
@@ -99,9 +104,12 @@ let number1 = 8;  // false
 let number2 = 95; // true
 ```
 
-Hint
-
 Solution 3
+
+```js
+numbers.includes(number1); //false
+numbers.includes(number2); // true
+```
 
 ------
 
@@ -117,6 +125,15 @@ show two different ways to put the expected "Four score and " in front of it.
 
 Solution 4
 
+```js
+//method 1
+"Four score and " + famousWords; 
+
+//method 2
+"Four score and ".concat(famousWords);
+
+```
+
 ------
 
 #### Question 5
@@ -126,6 +143,10 @@ Given an array of numbers `[1, 2, 3, 4, 5]`, mutate the array by removing the nu
 Hint
 
 Solution 5
+
+```js
+[1, 2, 3, 4, 5].splice(2, 1);
+```
 
 ------
 
@@ -153,11 +174,30 @@ Create a new array that contains all of the above values, but in an un-nested fo
 [ 'Fred', 'Wilma', 'Barney', 'Betty', 'Bambam', 'Pebbles' ]
 ```
 
-Hint 1
+Hint 1 : use array.concat();
 
-Hint 2
+Hint 2 : use spread syntax 
 
 Solution 6
+
+```js
+let flintstones = ["Fred", "Wilma", ["Barney", "Betty"], ["Bambam", "Pebbles"]];
+flintstones = [].concat(...flintstones);
+
+// solution with reduce
+flintstones = flintstones.reduce((accum, element) => {
+  return accum.concat(element);
+}, []);
+
+// solution with flat
+let newFlintstones = flintstones.flat();
+
+// solution with forEach
+let newFlintstones = [];
+flintstones.forEach(element => {
+  newFlintstones = newFlintstones.concat(element);
+});
+```
 
 ------
 
@@ -175,9 +215,26 @@ Create an array from this object that contains only two elements: Barney's name 
 [ 'Barney', 2 ]
 ```
 
-Hint
+Hint: Object.entries()
+
+**Object.entries()** : returns an array containing all of the `[key, value]` pairs of a given object's **own** enumerable string properties.
 
 Solution 7
+
+```js
+let flintstones = { Fred: 0, Wilma: 1, Barney: 2, Betty: 3, Bambam: 4, Pebbles: 5 };
+let a = [];
+for (const [key, value] of Object.entries(flintstones)) {
+    if (key === 'Barney') {
+       	a = [key, value];
+    }
+}
+
+//their solution, shift() removes the outer array [] brackets 
+Object.entries(flintstones).filter(pair => pair[0] === "Barney").shift();
+```
+
+
 
 ------
 
@@ -190,9 +247,14 @@ let numbers = [1, 2, 3, 4]; // true
 let table = { field1: 1, field2: 2, field3: 3, field4: 4 }; // false
 ```
 
-Hint
+Hint:  `Array.isArray()` 
 
 Solution 8
+
+```js
+Array.isArray(numbers);
+Array.isArray(table);
+```
 
 ------
 
@@ -206,7 +268,26 @@ let title = "Flintstone Family Members";
 
 Hint
 
+The **`padStart()`** method pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length. The padding is applied from the start of the current string.
+
+```js
+padStart(targetLength) // entire length 
+padStart(targetLength, padString)
+```
+
+The **`Math.floor()`** function returns the largest integer less than or equal to a given number.
+
+```js
+Math.floor(x)
+```
+
 Solution 9
+
+```js
+let title = "Flintstone Family Members";
+let padding = Math.floor((40 - title.length) / 2) + title.length;
+console.log(title.padStart(padding));
+```
 
 ------
 
@@ -220,3 +301,9 @@ let statement2 = "Easy come, easy go.";
 ```
 
 Solution 10
+
+```js
+console.log(statement1.split('').filter(letter => letter === 't').length);
+console.log(statement2.split('').filter(letter => letter === 't').length);
+```
+
