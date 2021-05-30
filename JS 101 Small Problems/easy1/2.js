@@ -23,12 +23,12 @@ let num1 = Number(rlSync.question("Please enter the lower limit number. \n"));
 let num2 = Number(rlSync.question("Enter the upper limit number. \n"));
 if (num1 < 1 || num2 > 99 || num1 > 99 || num2 < 1) {
   console.log("Please enter numbers between 1 and 99.");
-} else if (num2 < num1) { 
+} else if (num2 < num1) {
   console.log(`Please enter an upper limit number that is greater than the \
 lower limit number.`);
 } else {
   for (let counter = num1; counter <= num2; counter += 1 ) {
-    if (counter % 2 == 1) {
+    if (counter % 2 === 1) {
       console.log(counter);
     }
   }

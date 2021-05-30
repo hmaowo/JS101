@@ -173,6 +173,7 @@ newNumber = number; // "pass by value"
 
 arr = [1, 2, 3];
 newArr = arr; // "" pass by reference"
+			// if you change arr, NewArr also changes. 
 ```
 
 - In the above code, `number` and `newNumber` have the same values, but those values are distinct -- if you increment one, the other is unaffected. Thus, it looks a lot like pass-by-value. 
@@ -184,9 +185,11 @@ This similarity is a useful mental model. **<u>However,</u>** it's incorrect to 
 
 - **pass-by-reference** and **pass-by-value** describe the two main strategies of what happens to *function arguments : calling and returning them*.
   - **pass by value**: original variable will always retain same value. 
-    - a copy of the actual <u>*parameter's value*</u> is made in memory: caller and calee have two independent variables with the same value. 
+    - aka passing a copy of the value. 
+    - <u>*a copy of the actual parameter's value*</u> is made in memory: caller and calee have two independent variables with the same value. 
     - If callee modifies parameter value, the effect is not visible to the caller. 
   - **pass by reference:** function is able to change the original object 
+    - aka passing the pointer, rather than actual value. So if original object is changed, any variables that reference (point) to the original object also changes along with it. 
     - (also called pass by address) means to pass the **pointer** / reference of an argument in the calling function to the corresponding formal parameter of the called function so that a <u>*copy of the address of the actual parameter*</u> is made in memory. 
     - pass the pointer (a reference) of an object to the callee function, which then returns another reference to the same array to the calling code. When all is done, both the argument and new object point to the same array in memory.
     - the caller and callee use same variable for the parameter. 

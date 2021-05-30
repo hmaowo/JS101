@@ -1,10 +1,9 @@
-/*
-** ddaaiillyy ddoouubbllee
-** Write a function that takes a string argument and returns a new string that
-** contains the value of the original string with all consecutive duplicate
-** characters collapsed into a single character.
-*/
+// further exploration
+function crunch(string) {
+  console.log(string.replace(/(.)(?=\1)/ig, ''));
+}
 
+/*
 function crunch (string) {
   let newString = "";
   for (let index = 0; index < string.length; index++) {
@@ -14,13 +13,10 @@ function crunch (string) {
   }
   console.log(newString);
 }
+*/
 
 crunch('ddaaiillyy ddoouubbllee');    // "daily double"
 crunch('4444abcabccba');              // "4abcabcba"
 crunch('ggggggggggggggg');            // "g"
 crunch('a');                          // "a"
 crunch('');                           // ""
-
-/*
-Further exploration: using regular expressions
-*/

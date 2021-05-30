@@ -34,4 +34,4 @@ function count(array, element) {
 function findDup(array) {
   return array.find(element => count(array, element) === 2);
 }
-*/ 
+*/
