@@ -30,3 +30,19 @@ Example
 let string = 'aaabbbbccccc'
 let removedDuplicates = string.replace(/(.)(?=.*\1)/g, '');
 ```
+
+```
+x?
+If used immediately after any of the quantifiers *, +, ?, or {}, makes the quantifier non-greedy (matching the minimum number of times), as opposed to the default, which is greedy (matching the maximum number of times).
+```
+
+```
+x*	
+Matches the preceding item "x" 0 or more times. 
+
+x+	
+Matches the preceding item "x" 1 or more times.
+
+For example
+0*? matches 11111 but 0+? matches nothing
+```
