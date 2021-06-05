@@ -1,16 +1,20 @@
 # Introduction to the PEDAC Process
 
+Take away: write pseudocode for algorithm and test cases often instead of at the end of program. 
+
+
+
 The PEDAC process is one approach to solving programming problems. Its primary goal is to help you identify and avoid pitfalls that you may encounter when you don't code with intent.
 
-P - [Understand the] **P**roblem
+P - Understanding the problem 
 
-E - **E**xamples / Test cases
+E - Examples and test cases
 
-D - **D**ata Structure
+D - **D**ata Structures
 
-A - **A**lgorithm
+A - **A**lgorithms
 
-C - **C**ode
+C - **C**ode : implementing a solution in code 
 
 This guide describes a "lighter" version of the PEDAC process that should help you prepare for the upcoming interview assessment. We'll discuss PEDAC in much more detail in a later course.
 
@@ -264,8 +268,6 @@ function substrings(str) {
 Notice how similar it is to the formal pseudocode; that made writing the code straightforward. However, we could easily write this same code using the informal pseudocode with which we started.
 
 Checking whether the string is a palindrome is easy enough. However, we can write a function for it to help make our code more readable. Let's include that function in our algorithm.
-
-Copy Code
 
 ```plaintext
 // - Inside the `isPalindrome` function, check whether the string
