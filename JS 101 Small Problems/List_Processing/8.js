@@ -11,7 +11,7 @@ function buyFruit(arr) {
   return newArr;
 }
 
-/* their solution 
+/* their solution
 function buyFruit(fruitsList) {
   return fruitsList
     .map(fruit => repeat(fruit))
