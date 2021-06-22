@@ -1,3 +1,23 @@
+```javascript
+> let str = 'abcdefg';
+undefined
+> [...str]
+[ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]
+```
+
+```js
+let str = 'Four Score And Seven'
+undefined
+> [...str] // same as str.split('')
+[
+  'F', 'o', 'u', 'r', ' ', //empty space included 
+  'S', 'c', 'o', 'r', 'e',
+  ' ', 'A', 'n', 'd', ' ',
+  'S', 'e', 'v', 'e', 'n'
+```
+
+
+
 `(...args)`
 
 ```js
@@ -14,7 +34,7 @@ union([1, 3, 5], [3, 6, 9]);
 
 ```
 
-**Spread syntax** (`...`) allows an iterable such as an array expression or string to be expanded in places where 
+**Spread syntax** (`...`) allows an iterable such as an array expression **or string** to be expanded in places where 
 
 - zero or more arguments (for function calls) 
 - or elements (for array literals) are expected

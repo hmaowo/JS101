@@ -1,3 +1,18 @@
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Cheatsheet
+
+> - `/[a-z]/g` : Checks whether the character is a lowercase letter between `'a'` and `'z'`.
+> - `/[A-Z]/g` : Checks whether the character is an uppercase letter between `'A'` and `'Z'`.
+> - `/[^a-z]/gi` : Checks whether the character is neither an uppercase nor a lowercase letter.
+> - `g` : Tells the regex engine to search the entire string.
+> - `i` : Tells the regex engine to ignore case
+
+REGEX FLAGS
+
+- i means case insensitive search
+- 
+
 https://regex101.com/r/sN5cH4/1
 
 ```js
