@@ -56,8 +56,6 @@ We'll now take a look at a few examples of methods that take callbacks and analy
 
 Take a moment to digest this example:
 
-Copy Code
-
 ```js
 [[1, 2], [3, 4]].forEach(arr => console.log(arr[0]));
 // 1
