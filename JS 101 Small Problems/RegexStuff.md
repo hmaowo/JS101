@@ -61,3 +61,25 @@ Matches the preceding item "x" 1 or more times.
 For example
 0*? matches 11111 but 0+? matches nothing
 ```
+
+Word Boundary Anchor
+
+If you created any additional test cases, you may have noticed that the provided solution does not handle the case where a "number word" is a part of another word, such as:
+
+```javascript
+wordToDigit('The weight is done.');      // "The w8 is d1."
+```
+
+We can handle this case by wrapping the regex pattern with the [word boundary anchor](https://launchschool.com/books/regex/read/anchors#wordbounds), `\b`:
+
+```javascript
+regex = new RegExp('\\b' + word + '\\b', 'g');
+```
+
+This results in:
+
+```javascript
+wordToDigit('The weight is done.');      // "The weight is done."
+```
+
+Note that we have to escape the string `'\\b'` with an extra backslash—otherwise JavaScript will interpret `'\b'` as a backspace character.

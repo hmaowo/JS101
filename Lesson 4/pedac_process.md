@@ -1,3 +1,26 @@
+P
+
+- rules
+- requirements 
+  - implicit
+  - e
+
+E
+
+- input & output
+
+D
+
+- visualizing the data
+
+A
+
+- pseudocode
+
+C
+
+- code 
+
 ## P: Understanding the problem 
 
 - Establish the rules/ define the boundaries of the problem
@@ -11,8 +34,8 @@
 Given a string, produce a new string with every other word removed. 
 
 - Explicit requirements:
-  - Input: string
-  - Output: new string
+  - **Input:** string
+  - **Output**: new string
   - remove every other word from input string
 - Questions: 
   - what do we mean by every other word?
