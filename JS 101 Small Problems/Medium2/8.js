@@ -25,8 +25,8 @@ Algorithm
             // remenber slice (start, end) end is excluded.
           - push this into arr[]
           - set maker = index + 2; // excluding the space between sentence
-      - sort arr from longest to shortest sentence
-      - return arr[0];
+      - sort arr from longest to shortest sentence( in terms of word count!!)
+      - return sorted array [0];
   - wordCounter(longestSentence)
     - returns wordCount
   - print(sentence, wordCount)
@@ -34,12 +34,13 @@ Algorithm
 */
 
 function longestSentence(str) {
-  let longest = getLongest(str);
-  let wordCount = wordCounter(longest);
-  print(longest, wordCount);
+  let arr = getSentences(str);
+  let sentence = sortSentences(arr);
+  let wordCount = wordCounter(sentence);
+  print(sentence, wordCount);
 }
 
-function getLongest(str) {
+function getSentences(str) {
   let arr = [];
   let marker = 0;
   for (let index = 0; index < str.length; index += 1) {
@@ -48,9 +49,15 @@ function getLongest(str) {
       marker = index + 2;
     }
   }
+  return arr;
+}
 
-  arr.sort((a, b) => (b.length - a.length));
-  return arr[0];
+function sortSentences(array) { // arr will get mutated because its pass by reference
+  array.sort((a, b) => {
+    return b.split(' ').length - a.split(' ').length;
+  });
+
+  return array[0];
 }
 
 function wordCounter(longest) {
