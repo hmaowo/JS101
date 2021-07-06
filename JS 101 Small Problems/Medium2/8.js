@@ -30,14 +30,33 @@ Algorithm
   - wordCounter(longestSentence)
     - returns wordCount
   - print(sentence, wordCount)
+// find sentence with longest word
+// function longestWord(arr)
+//    create new array called wordArray, (using arr), of the longest word of each sentence.
+//    create a copy of wordArray called copy
+//    sort the copy array from longest to shortest
+//    use sorted copy to get the index of copy[0] from wordArray.
+//    use this index on arr to get the sentence with longest word.
 
 */
 
 function longestSentence(str) {
   let arr = getSentences(str);
-  let sentence = sortSentences(arr);
-  let wordCount = wordCounter(sentence);
-  print(sentence, wordCount);
+  mostWordSentence(arr);
+  longestWord(arr);
+  console.log('-'.repeat(40) + '\n');
+}
+
+function longestWord(arr) {
+  let wordArray = arr.map(sentence => {
+    let wordArr = sentence.split(' ').sort((a, b) => (b.length - a.length));
+    return wordArr[0];
+  });
+  let copy = wordArray.slice();
+  copy.sort((a, b) => (b - a));
+  let index = wordArray.indexOf(copy[0]);
+  console.log(`The longest word is "${copy[0]}".\n`);
+  console.log(`The sentence with longest word is "${arr[index]}"\n`);
 }
 
 function getSentences(str) {
@@ -52,16 +71,14 @@ function getSentences(str) {
   return arr;
 }
 
-function sortSentences(array) { // arr will get mutated because its pass by reference
-  array.sort((a, b) => {
+function mostWordSentence(array) { // arr will get mutated because its pass by reference so use a copy
+  let copy = array.slice();
+  copy.sort((a, b) => {
     return b.split(' ').length - a.split(' ').length;
-  });
-
-  return array[0];
-}
-
-function wordCounter(longest) {
-  return longest.split(' ').length;
+  }); // sort by which sentence in the array has most words
+  let sentence = copy[0];
+  let wordCount = sentence.split(' ').length;
+  print(sentence, wordCount);
 }
 
 function print(sentence, wordCount) {
