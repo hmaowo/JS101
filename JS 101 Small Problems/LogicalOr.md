@@ -1,6 +1,6 @@
 # Logical OR assignment (||=)
 
-The logical OR assignment (`x ||= y`) operator only assigns if `x` is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
+The logical OR assignment (`x ||= y`) operator only assigns `y`if `x` is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
 
 x  = x || y 
 
