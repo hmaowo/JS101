@@ -5,3 +5,6 @@ let arr2 = [1];
 arr1 === arr2 // false
 ```
 
+```
+[] === [] // false
+```

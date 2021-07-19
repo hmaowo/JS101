@@ -1,14 +1,16 @@
 function neutralize(sentence) {
   let words = sentence.split(" ");
 
-  words.forEach(word => {
+  for (let count = 0; count < words.length; count++) {
+    let word = words[count];
     if (isNegative(word)) {
       const index = words.indexOf(word);
       words.splice(index, 1);
+      count -= 1;
     }
-  });
+  }
   return words.join(" ");
-};
+}
 
 function isNegative(word) {
   return ["dull", "boring", "annoying", "chaotic"].includes(word);
