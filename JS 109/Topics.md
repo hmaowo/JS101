@@ -210,6 +210,12 @@ undefined >= 1; // false -- becomes NaN >= 1
 
 **Explicit type coercion**: is when you (programmer) intentionally use a function to convert one type of value to another. [Reference](Lesson 2 Explicit Type Coercion.md)
 
+>  **Best practice is to always use explicit type coercion**
+>
+> The only exception is to not use  `String()` or `toString()` inside interpolation expressions of template literals. `${...}` because template literals implicitly coerce the interpolation expressions to strings. 
+>
+> Hence we don't write `${something.toString()}` or `${String(something)}`.
+
 - For example the **`Number`** function coerces a string to a number. 
 
 ```terminal
@@ -356,13 +362,31 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
 <u>mutability vs. immutability vs. `const`</u>
 
-- **Immutable**: means that the data's structure cannot be altered. 
-  - Primitive values are **immutable**. This means that the value can't be altered. If you assign a variable to a primitive value, you can't change the primitive value, you can only reassign the variable to a different value, or use the value in an expression. 
-- **Mutable**: 
-  -  Objects are **mutable** -  it has parts that can be altered. 
-- A `const` declaration doesn't mean that the value of the variable is immutable, it just means that the variable identifier can't be reassigned to a different value. 
+- **Immutable**: means that the data's structure or value cannot be altered. 
+  - Primitive values are **immutable**. This means that the value can't be altered. You can only reassign the variable to a different value. When using primitive values in operations, they always evaluate to a new value. For example `0 + 0` evaluates to a new value `0`. 
+- **Mutable**: means a type of variable that can be changed. 
+  -  Objects and arrays (which are also objects) are **mutable** -  it has parts that can be altered. 
+- Variables declared using `const` are not necessarily immutable. If you declare an object with `const`, the object's properties can still be changed. However, the variable identifier cannot be reassigned to a different value. 
+  - constants are block scoped, just like variables declared with `let` keyword. 
+  - 
 
 <u>loose and strict equality</u>
+
+**Equality operators**: always evaluates to a `boolean` type. 
+
+- The difference between strict equality and loose equality operator is that loose equality operator `==` attempts to convert operands to the same type before comparing. 
+- **Loose equality / non-strict equality operator**   is `==`
+  - Loose equality operators perform implicit type coercion when comparing operands are of different types. 
+- **Strict equality** operator is `===` and `!==` . Strict equality operator compares two operands and returns a Boolean result. It checks whether the operands are of different types. It adheres to the Strict Equality Comparison Algorithm. [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality)
+  - If the operands are of different types, it returns `false`
+  - If both operands are objects, only return `true` if they refer to the same object. 
+  - If both operands are `null` or both operands are `undefined`, return `true` 
+  - If either operand is NaN, return false. 
+    - NaN is the only number that is not equal to itself. You must use `Number.isNaN(value)` or `Object.is(value, NaN)` to determine whether a number is `NaN`. 
+  - Otherwise, compare the two operand's values. 
+    - Numbers must have the same numeric values. `+0` and `-0` and considered to be the same value. 
+    - Strings must have same characters in same order. 
+    - Booleans must be both true or both false. 
 
 <u>passing arguments into and return values out of functions</u>
 
