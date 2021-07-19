@@ -42,7 +42,8 @@ true
 true
 ```
 
-- comparing boolean with string 
+### Boolean == String
+
 - Here, the boolean `true` is coerced to the number `1`, and the comparison becomes `'1' == 1`. From our previous investigations, we know that this expression evaluates to `true` since the string `'1'` gets coerced to the number `1`
 
 - Another situation occurs when comparing `undefined` and `null`. The `==` operator considers them equal:

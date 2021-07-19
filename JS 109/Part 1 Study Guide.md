@@ -197,8 +197,6 @@ Note in particular that object property names **are not** variables.
 
 There are two main ways to describe the following code:
 
-Copy Code
-
 ```js
 function appendTo(str, otherStr) {
   for (let index = 0; index < otherStr.length; ++index) {
