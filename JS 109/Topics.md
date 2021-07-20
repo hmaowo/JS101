@@ -1,3 +1,17 @@
+**Functions**: are defined with the `function` keyword. 
+
+**Variable**: hold data value and must have a unique identifier name. Variables are declared using `let` or `const` and are initialized to `undefined` unless specified to be initialized to a specific value. 
+
+- constants, function names, etc. 
+
+```js
+let foo = 3;
+function bar(qux) { console.log("hello"); }
+const XYZZY = "abc";
+// Identify the variables
+// foo, bar, quix, XYZZY
+```
+
 <u>declarations, initialization, assignment, and re-assignment</u>
 
 ##### **Declarations**: 
@@ -219,7 +233,10 @@ There are 5 primitive data types.
 **Objects**: Objects are comprised of primitive values or other objects. Objects are **mutable:** If you change something about the the object, all variables that reference that object will also change. 
 
 - simple objects
-- arrays
+- **arrays**: 
+  - an indexed based list of elements, each element has a value of any type. You can define an array by placing a list of values between brackets  (`[]`). 
+  - Uses zero-based indexing system.
+  - Replace and add elements with brackets `[]` and assignment operator
 - Dates
 - Functions
 
@@ -372,99 +389,6 @@ undefined >= 1; // false -- becomes NaN >= 1
 
 **binary**: when operator works with 2 values, **ternary**: operator works with 3 values, **unary**: operator works with one value. 
 
-<u>object properties</u> [reference](https://docs.google.com/document/d/1Vzp6mfGQQbp7gd8Y0Wfq5k5h704f_yH1Y7nJ4xpGJUI/edit?usp=sharing)
-
-**Objects** are collections of **properties**. Properties are **key-value pairs**. You can also refer to the key name as "property". 
-
-- Object keys are strings, but values can be of any type, even other objects. 
-- This is the syntax for an object literal. 
-
-```js
-let person = {
-  name:    'Jane',
-  age:     37,
-  hobbies: ['photography', 'genealogy'],
-};
-```
-
-- We can access an object value using 1) dot notation and 2) bracket notation
-
-```terminal
-> person.name                 // dot notation
-= 'Jane'
-
-> person['age']               // bracket notation
-= 37
-```
-
-- Must use bracket notation for key names. 
-
-```terminal
-> let key = 'name'
-> person[key]
-
-> person['key']
-```
-
-- Use **`delete`** keyword to remove a property from an object. 
-
-```terminal
-> person = { name: 'Jane', age: 37, hobbies: ['photography', 'genealogy'], height: '5 ft', gender: 'female' }
-
-> delete person.age
-= true
-
-> delete person['gender']
-= true
-
-> delete person['hobbies']
-= true
-
-> person
-= { name: 'Jane', height: '5 ft' }
-```
-
-- If we use `const` to declare a variable and initialize it to an object, the variable can't be changed refer to any other object. But the object's properties and property values can still be modified. So `const` does not allow changing what `const` points to, but the content is still modifiable. 
-
-```terminal
-> const MyObj = { foo: "bar", qux: "xyz" }
-
-> delete MyObj.foo
-true
-> MyObj
-{ qux: 'xyz' }
-
-> MyObj.qux = 'no'
-'no'
-> MyObj
-{ qux: 'no' }
-
-
-> MyObj = {} // Uncaught TypeError: Assignment to constant variable.
-```
-
-- We can use **`object.freeze`** to freeze the property values of an object, just like arrays. However, also like arrays, this function doesn't freeze nested arrays or objects. 
-
-```terminal
-> const MyObj = Object.freeze({ foo: "bar", qux: "xyz" })
-> MyObj.qux = "hey there"
-> MyObj
-= { foo: 'bar', qux: 'xyz' }
-```
-
--  **`hasOwnProperty`** returns true if the name of the property is one of the calling object's own properties. 
-- **`Object.keys`** returns an object's keys as an array. 
-- **`Object.values`** returns an array of the values from every own property in an object.  
-
-```js
-let person = { name: 'Bob', age: 30, height: '6ft' };
-let personValues = Object.values(person);
-console.log(personValues); // => [ 'Bob', 30, '6ft' ]
-```
-
-- `Object.entries` returns an array of nested arrays of the properties. 
-- `Object.assign` merges two or more objects into a single object. This mutates the first object. 
-
 <u>mutability vs. immutability vs. `const`</u>
 
 - **Immutable**: means that the data's structure or value cannot be altered. 
@@ -536,6 +460,8 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
 - Strings are data enclosed in single, double quotation marks, or string literals.
 
+- STRINGS CANNOT BE MUTATED. 
+
 - String use integer-based index that starts from 0 to represent each character. 
 
   - You can reference a character using the index. 
@@ -559,17 +485,14 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
   - When using **binary plus**`+` operator, the general rule is that if one operand is a String and the other operand isn't, then the non-String operand is coerced into a String and concatenated with the String operand.
 
-- String objects, works on string literals. 
-
-  - `String.charAt(index)`: returns a new string based on an index. 
-
-  - `String.concat(str1, str2...)`: concatenates string arguments to the calling string and returns a new string. 
+- String methods [reference](Lesson 4 String methods)
 
   - `String.endsWith()`: returns boolean (true  / false) on whether a string ends with characters of a specified string. 
 
-    > `str.endsWith(searchString)``
-    >
-    > ``str.endsWith(searchString, length)` 
+    ```
+    str.endsWith(searchString)
+    str.endsWith(searchString, length) 
+    ```
 
     ​     Parameters
 
@@ -577,16 +500,26 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
       If provided, it is used as the length of `str`. Defaults to `str.length`.
 
-  - `String.includes(searchString, position)`: case insensitive search to determine whether a string is found, returns boolean. 
+  - `String.includes(searchString, position)`: case insensitive search to determine whether a string is found in the string `includes` was called on, returns boolean. 
 
     - Optional parameter: `position`
 
     The position within the string at which to begin searching for `searchString`. (Defaults to `0`.)
 
+  - `String.split()`: separates a string into multiple strings and returns them in an array. 
+
+    ```js
+    split()
+    split(separator)
+    split(separator, limit)
+    ```
+
   - `String.indexOf()`: returns the index of the first occurrence of the specified value. Returns -1 if value is not found.
 
-    > `indexOf(searchValue)`
-    > `indexOf(searchValue, fromIndex)`
+    ```
+    indexOf(searchValue)
+    indexOf(searchValue, fromIndex)
+    ```
 
     - Optional parameter`fromIndex` 
 
@@ -594,38 +527,417 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
        If `fromIndex` is greater than the string's `length`, the returned value IS THE STRING's `length
 
-  - `String.charAt()`: returns new string of the single UTF-16 code at the specified offset into string. 
+  - `String.charAt()`: returns the character at the index of the given string.  
 
-    > `charAt(index)`
+    ```
+    charAt(index)
+    ```
 
-  - `String.slice` 
+  - `String.charChodeAt`: instead of returning the character at a given index, it returns the Unicode code point at the index. 
 
-    > `slice(beginIndex)`
-    > `slice(beginIndex, endIndex)`
+    ```terminal
+    > 'abcdef'.charCodeAt(1)
+    98
+    ```
+
+    
+
+  - `String.slice` : extracts a section of a string and returns it as a new string. 
+
+    ```
+    slice(beginIndex)
+    slice(beginIndex, endIndex)
+    ```
 
     1. If `start > stop`, `slice()` will return the empty string. (`""`)
     2. If `start` is negative: sets char from end of string. 
     3. if `stop` is negative: sets stop to `string.length - Math.abs(stop)` (original value), except bounded at 0. Thus, 
 
-  - `String.substring` or `String.substr()`
+  - `String.substring` or `String.substr()`: returns the part of the String between start and end indexes. 
 
-    > substring(indexStart)
-    > `substring(indexStart, indexEnd)`
-    
+    ```
+    substring(indexStart)
+    substring(indexStart, indexEnd)
+    ```
+
     1. If `start > stop`, then `substring` will swap the 2 arguments.
     2. If either argument is negative or is `NaN`, it is treated like `0`. 
-    
+
   - `String.concat()`: concatenates the string arguments to the calling string and returns a new string. 
 
-    > `concat(str1)`
-    > `concat(str1, str2)`
-    > `concat(str1, str2, ... , strN)`
+    ```
+    concat(str1)
+    concat(str1, str2)
+    concat(str1, str2, ... , strN)
+    ```
+
+  - `String.match()` : retrieves the result of matching a string against a regular expression. 
+
+    ```
+    match(regexp)
+    ```
+
+    Parameter is a regular expression object. 
+
+  - `String.padStart()`: pads the current string with another string until resulting string reaches given length. Padding is applied from start of the current string. 
+
+    ```
+    padStart(targetLength)
+    padStart(targetLength, padString)
+    ```
+
+    - Optional Parameter: `padString`
+    - The string to pad the current `str` with. If `padString` is too long to stay with the target length, it will be truncated from   the end. The default value is "". 
+
+  - `String.repeat()`: Returns a new string, comprised of the original string concatenated with a specific number of copies of that string. 
+
+    ```
+    repeat(count)
+    ```
+
+  - `String.replace`(): Returns a new string with some of all matches of a `pattern` replaced by a `replacement`. The `pattern` can be a string or a regular expression, and the `replacement` can be a string or function. If `pattern` is a string, **only the first occurrence** will be replaced. 
+
+    ```
+    replace(regexp, newSubstr)
+    replace(regexp, replacerFunction)
+    
+    replace(substr, newSubstr)
+    replace(substr, replacerFunction)
+    ```
+
+  - `String.toLowerCase()`: Returns new string with calling string converted to lower case. 
+
+  - `String.toUpperCase()`: converts the calling string value to uppercase then returns that value. (Also implicitly converts value to string if it isn't one??)
+
+  - `String.trim()`: removes whitespace from both ends of string.
 
 <u>working with Arrays, especially the iteration methods (`forEach`, `map`, `filter`, and `find`)</u>
 
-<u>working with Objects; accessing keys and values of an Object as arrays</u>
+Iteration methods
 
-<u>arrays are objects</u>
+- `Array.forEach()`:  loops through each element in an array and executes an anonymous callback function on that array element. 
+
+  - We pass a **callback** function to forEach as an argument. When forEach() runs, it invokes the call back once for each element, passing the *element's value* as the argument. 
+  - forEach() always returns undefined. 
+  - forEach() does not mutate the array. 
+
+  ```js
+  array.forEach(function(element)) {
+  	...        
+  }
+  
+  array.forEach(element => {
+    
+  })
+  ```
+
+  ```javascript
+  // Arrow function
+  forEach((element) => { ... } )
+  forEach((element, index) => { ... } )
+  forEach((element, index, array) => { ... } ) // array is the array forEach() was called upon. 
+  
+  // Callback function
+  forEach(callbackFn)
+  forEach(callbackFn, thisArg)
+  
+  // Inline callback function
+  forEach(function callbackFn(element) { ... })
+  forEach(function callbackFn(element, index) { ... })
+  forEach(function callbackFn(element, index, array){ ... })
+  forEach(function callbackFn(element, index, array) { ... }, thisArg)
+  
+  ```
+
+- `Array.map()`: creates a new array by using the results of executing a callback function on each element of an array. 
+
+  -  Transforms an array's elements that returns a new array with the transformed values. If you don't have a return value, then that iteration will return undefined and the element will be undefined. 
+  - Use `Array.map()` when you want to build a new array. 
+  - `Array.map()` does not mutate the original array. 
+
+  ```js
+  // Arrow function
+  map((element) => { ... } )
+  map((element, index) => { ... } )
+  map((element, index, array) => { ... } )
+  
+  // Callback function
+  map(callbackFn)
+  map(callbackFn, thisArg)
+  
+  // Inline callback function
+  map(function callbackFn(element) { ... })
+  map(function callbackFn(element, index) { ... })
+  map(function callbackFn(element, index, array){ ... })
+  map(function callbackFn(element, index, array) { ... }, thisArg)
+  
+  ```
+
+- `Array.filter()`:  returns a new array that includes all the elements that were returned as truthy through a testing (callback) function. Returns an empty array if no elements passed the testing function. 
+
+  - Definition 2`Array.filter()`:  iterates over each element in an array and invokes & executes a callback function on that element. If the callback function returns a truthy value, then that element's value is appended to the new array. If the callback function doesn't return a truthy value, the function does nothing. At the end of this function, the new array is returned. So if none of the elements return truthy, then `Array.filter()` returns an empty array`[]`. 
+
+  ```terminal
+  > [1, 2, 3].filter(element => element > 4)
+  []
+  ```
+
+  - `Array.filter()` does not mutate the original array. 
+
+- `Array.find()`: executes a testing / callback function for each index in an array until a truthy value is returned. `find` returns the value of that element. If no truthy value is returned, `find` returns `undefined`. 
+
+  - returns the **value of the first element** in an array that passes(textbook word: satisfies) the testing (callback) function. If no element satisfies the testing function, `undefined` is returned. 
+
+  ```js
+  const array1 = [5, 12, 8, 130, 44];
+  
+  const found = array1.find(element => element > 10);
+  
+  console.log(found);
+  // expected output: 12
+  
+  ```
+
+- Some other methods
+
+  - use `Array.findIndex()` to get the *index* of the found element. Returns - 1 if no element passed the test. 
+
+  - use `Array.indexOf(search element, fromIndex)` to get the first index at which the element is found. Returns - 1 if no element is found. 
+
+  - use `Array.includes()` to see if a value exists in an array. Returns Boolean true/ false. 
+
+  - `Array.some()`: returns a Boolean value of whether at least one element in an array passes the testing callback function. Returns true as soon as it finds an element that satisfies the testing function. 
+
+  - `Array.every()`: returns a Boolean value of whether all elements in an array satisfies the testing callback function. 
+
+  - `Array.reduce()`: executes a **reducer** function on each element of an array, resulting in a single output value. It takes two arguments 1) a callback function 2) value that initializes the **accumulator**.
+
+    - If no initial value is given, index starts at 1, and the first element in the array(which is at index 0) is used as the initial `accumulator` value and skipped as `currentValue`. 
+    - Index of reducer function starts from 0 if initial value is provided. Otherwise it starts from index 1. 
+
+    ```js
+    let array = [1, 5, 7, 3].slice(0, 3);
+    arr.reduce((accum, cv) => accum + cv)
+    ```
+
+    ```js
+    // Arrow function
+    reduce((accumulator, currentValue) => { ... } )
+    reduce((accumulator, currentValue, index) => { ... } )
+    reduce((accumulator, currentValue, index, array) => { ... } )
+    reduce((accumulator, currentValue, index, array) => { ... }, initialValue)
+    
+    // Callback function
+    reduce(callbackFn)
+    reduce(callbackFn, initialValue)
+    
+    // Inline callback function
+    reduce(function callbackFn(accumulator, currentValue) { ... })
+    reduce(function callbackFn(accumulator, currentValue, index) { ... })
+    reduce(function callbackFn(accumulator, currentValue, index, array){ ... })
+    reduce(function callbackFn(accumulator, currentValue, index, array) { ... }, initialValue)
+    ```
+
+  - `Array.join()`: returns a new string that has concatenated all the elements in an array, separated by commas or a specified separator string. If the array has only one item, then that item will be returned without using the separator.
+
+    ```js
+    join()
+    join(separator)
+    ```
+
+    
+
+- Modifying arrays: methods that **mutate the array**
+
+  - `Array.push`: adds one or more elements to the end of an array and returns the new length of the array. 
+
+  - `Array.sort()`: [Reference](Lesson 5 Sorting) sorts elements of an array in place and returns the sorted array. 
+
+    - The `sort` method iterates over the array and passes two elements as argument to the callback function during each iteration. It follows these rules
+
+      - If the callback returns a number less than `0`, place `a` before `b`.
+      - If the callback returns a number greater than `0` place `b` before `a`.
+      - If the callback returns `0`, leave the relative positions of `a` and `b` unchanged.
+
+    - If no compare function is specified, the array elements are converted to strings then sorted based on Unicode code point value. 
+
+      ```js
+      // Functionless
+      sort()
+      
+      // Arrow function
+      sort((firstEl, secondEl) => { ... } )
+      
+      // Compare function
+      sort(compareFn)
+      
+      // Inline compare function
+      sort(function compareFn(firstEl, secondEl) { ... })
+      ```
+
+      ```js
+      array.sort((a, b) => a - b) // sort in ascending order
+      
+      array.sort((a, b) => b - a) // sort in descending order
+      ```
+
+      ```js
+      array.sort((a, b) => {
+        if (a < b) {
+          return -1;
+        } else if (a > b) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }); // sorts in ascending order
+      ```
+
+  - `Array.reverse()`: reverses an array *in place* and returns a reference to the mutated array. The first element becomes the last and the last element becomes the first. 
+
+<u>object properties</u> 
+
+[reference](https://docs.google.com/document/d/1Vzp6mfGQQbp7gd8Y0Wfq5k5h704f_yH1Y7nJ4xpGJUI/edit?usp=sharing) [another reference](https://docs.google.com/document/d/17dKDbqq2XgUw4fErXA0iZiUiROTj50loBjYx4quwYYg/edit)
+
+**Objects** are collections of **properties**. Properties are **key-value pairs**. You can also refer to the key name as "property". 
+
+- Object keys are strings, but values can be of any type, even other objects. Key names must be unique. 
+- Objects are passed by reference— when we make changes to an object passed into a function, those changes are permanent.
+- We can navigate complex, nested objects by chaining operators.
+- We can iterate through objects using the For...in syntax.
+
+- Objects are mutable, we can change their properties even when they're declared with `const`'. Just that the variable can't be changed to refer to any other object. If we use `const` to declare a variable and initialize it to an object, the variable can't be changed refer to any other object. 
+
+```terminal
+> const MyObj = { foo: "bar", qux: "xyz" }
+
+> delete MyObj.foo
+true
+> MyObj
+{ qux: 'xyz' }
+
+> MyObj.qux = 'no'
+'no'
+> MyObj
+{ qux: 'no' }
+
+
+> MyObj = {} // Uncaught TypeError: Assignment to constant variable.
+```
+
+```js
+let person = {
+  name:    'Jane',
+  age:     37,
+  hobbies: ['photography', 'genealogy'],
+};
+```
+
+- An object literal is composed of comma-separated key-value pairs surrounded by curly braces.
+
+<u>working with Objects; accessing keys and values of an Object as arrays</u> [reference](https://launchschool.com/books/javascript/read/objects#whatareobjects)
+
+Iterate over object using for... in loop. 
+
+```js
+let person = {
+  name: 'Bob',
+  age: 30,
+  height: '6 ft'
+};
+
+for (let prop in person) {
+  console.log(person[prop]);
+}                             // => Bob
+                              //    30
+                              //    6 ft
+```
+
+
+
+Access key and values of an Object as an array
+
+- Referencing an out of bounds index, or using a key to access a property that doesn't exist returns `undefined`
+  - **`hasOwnProperty`** returns true if the name of the property is one of the calling object's own properties. This would differentiate between a property with `undefined` as its value and one that doesn't exist. 
+  - Another way is to use `Object.keys(obj).includes('c')`
+
+- We can access an object value using 1) dot notation and 2) bracket notation. 
+
+```terminal
+> person.name                 // dot notation
+= 'Jane'
+
+> person['age']               // bracket notation
+= 37
+```
+
+- Use **`delete`** keyword to remove a property from an object. 
+
+```terminal
+> person = { name: 'Jane', age: 37, hobbies: ['photography', 'genealogy'], height: '5 ft', gender: 'female' }
+
+> delete person.age
+= true
+
+> delete person['gender']
+= true
+
+> delete person['hobbies']
+= true
+
+> person
+= { name: 'Jane', height: '5 ft' }
+```
+
+- **`Object.keys()`** returns an object's keys as an array. 
+
+  ```js
+  let obj = { ''};
+  let array = Object.keys(obj);
+  ```
+
+- **`Object.values`** returns an array of the values from every own property in an object.  
+
+Working with Objects
+
+```js
+let person = { name: 'Bob', age: 30, height: '6ft' };
+let personValues = Object.values(person);
+console.log(personValues); // => [ 'Bob', 30, '6ft' ]
+```
+
+- `Object.entries` returns an array of nested arrays of the properties. 
+
+- We can use **`object.freeze`** to freeze the property values of an object, just like arrays. However, also like arrays, this function doesn't freeze nested arrays or objects. 
+
+```terminal
+> const MyObj = Object.freeze({ foo: "bar", qux: "xyz" })
+> MyObj.qux = "hey there"
+> MyObj
+= { foo: 'bar', qux: 'xyz' }
+```
+
+- `Object.assign` [reference](Lesson 5 nested_data_structures) merges two or more objects into a single object. This mutates the first object. 
+
+  - Can be used to create a shallow copy of the object. 
+
+    ```js
+    let copyOfObj = Object.assign({}, obj);
+    ```
+
+<u>arrays are objects</u>     [reference][Lesson 5 nested_data_structures]
+
+- When arrays declared and initialized with `const`, the contents of the array are still modifiable. `Const` merely prohibits the identifier from referencing any other array. 
+
+- In order to make the elements of an array constant, use `Object.freeze` method. However `Object.freeze` only works one level deep in a nested array. The nested arrays can still be modified. 
+
+  ```js
+  let arr = Object.freeze([[1], [2], [3]]);
+  arr[2].push(4);
+  arr; // =>  [ [ 1 ], [ 2 ], [ 3, 4 ] ]
+  ```
+
+- `Array.slice()` creates a shallow copy of the array. Only the top level array is copied. When the array contains other objects, those objects are shared, not copied. When you mutate a shared object in an array or other collection, it is the shared object you are affecting rather than the collection. 
 
 <u>understand the concepts of *pass-by-reference* and *pass-by-value*</u>
 
@@ -646,6 +958,59 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 <u>side-effects</u>
 
 <u>naming conventions (legal vs idiomatic)</u>
+
+- **Idiomatic names**: are names that follow the name conventions in [Naming Conventions section of the JavaScript book](https://launchschool.com/books/javascript/read/preparations#namingconventions)
+
+| Category                                     | Name              | Notes             |
+| :------------------------------------------- | :---------------- | :---------------- |
+| Non-constant variables and object properties | `employee`        |                   |
+|                                              | `number`          |                   |
+|                                              | `fizzBuzz`        |                   |
+|                                              | `speedOfLight`    |                   |
+|                                              | `destinationURL`  | URL is an acronym |
+|                                              | `m00n`            |                   |
+| Constructor functions and classes            | `Cat`             |                   |
+|                                              | `BoxTurtle`       |                   |
+|                                              | `FlightlessBird`  |                   |
+| Other functions                              | `parseURL`        | URL is an acronym |
+|                                              | `goFaster`        |                   |
+| Configuration and magic constants            | `ABSOLUTE_PATH`   |                   |
+|                                              | `TODAY`           |                   |
+| Other `const` names                          | `employeeOfMonth` | Local style       |
+|                                              | `HairyCat`        | Local style       |
+|                                              | `ABSOLUTE_PATH`   | Local style       |
+
+- **Legal names**: are names that are syntactically valid, but non-idiomatic. 
+
+##### Valid but Non-Idiomatic Names
+
+| Category                                     | Name           | Notes                        |
+| :------------------------------------------- | :------------- | :--------------------------- |
+| Universally non-idiomatic                    | `$number`      | Begins with $                |
+|                                              | `fizz_buzz`    | snake_case not allowed       |
+|                                              | `fizzBUZZ`     | BUZZ is not an acronym       |
+|                                              | `_hello`       | Begins with `_`              |
+|                                              | `goodbye_`     | Ends with `_`                |
+|                                              | `milesperhour` | Undifferentiated words       |
+|                                              | `MILESPERHOUR` | Undifferentiated words       |
+| Non-constant variables and object properties | `Employee`     | Begins with capital letter   |
+|                                              | `fizzBUZZ`     | BUZZ is not an acronym       |
+|                                              | `FIZZ_BUZZ`    | SCREAMING_SNAKE_CASE         |
+| Constructor functions and classes            | `cat`          | Begins with lowercase letter |
+|                                              | `makeTurtle`   | Begins with lowercase letter |
+|                                              | `FIZZ_BUZZ`    | SCREAMING_SNAKE_CASE         |
+| Other functions                              | `ParseURL`     | Begings with capital letter  |
+|                                              | `FIZZ_BUZZ`    | SCREAMING_SNAKE_CASE         |
+| Configuration and magic constants            | `absolutePath` | Not SCREAMING_SNAKE_CASE     |
+|                                              | `Today`        | Not SCREAMING_SNAKE_CASE     |
+
+##### Invalid Names
+
+| Name       | Notes                         |
+| :--------- | :---------------------------- |
+| 42ndStreet | Begins with number            |
+| fizz-buzz  | Hyphen not allowed            |
+| fizz.buzz  | Looks like property reference |
 
 <u>be able to explain what a function does without talking about its implementation; that is, document a function's use and purpose. (See below.)</u>
 
