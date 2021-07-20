@@ -33,13 +33,118 @@
 
 <u>variable scope, especially how variables interact with function definitions and blocks</u>
 
-- Variables have scope, which is where the variable is available in a program. The location where you declare a variable is the scope of the variable. 
+- Variables have scope, which is where the variable is available in a program. A variable's scope is determined by where its declared. 
 
-- in Javascript, variables declared with `let` or `const` keywords have **block** scope. 
+- **scope** means the part of the program that can access that variable by name. There are two different types of scope
 
-  - A **block** is the statements and expressions between a pair of opening and closing curly braces `{}`, usually. 
-- But not everything between curly braces is a block. Function bodies are not blocks, nor are braces that surround an object literal, but we can treat them like blocks. Blocks that aren't functions bodies are **non**-**function blocks**.
-- If you declare a variable outside a block, the variable is available within the block as well as after the block ends. 
+  - **local scope**: Local scope has two forms: function scope & block scope. 
+
+    - **function scope**: Functions define a new scope for local variables. 
+
+      Rules
+
+      1. Outer scope variables can be accessed by the inner scope.
+
+      2. Inner scope variables cannot be accessed in the outer scope.
+
+      3. Peer scopes do not conflict. (variables in different scopes don't conflict)
+
+         ```js
+         function funcA() {
+           let a = 'hello';
+           console.log(a);
+         }
+         
+         function funcB() {
+           console.log(a); // ReferenceError: a is not defined
+         }
+         
+         funcA();
+         funcB();
+         ```
+
+      4. Nested Functions have their own variable scope. 
+
+         ​	- Nested Functions follow the same rules of inner and outer scoped variables. 
+
+         ```js
+         let a = 1;           // first level variable
+         
+         function foo() {     // second level
+           let b = 2;
+         
+           function bar() {   // third level
+             let c = 3;
+             console.log(a);  // => 1
+             console.log(b);  // => 2
+             console.log(c);  // => 3
+           }
+         
+           bar();
+         
+           console.log(a);    // => 1
+           console.log(b);    // => 2
+           console.log(c);    // => ReferenceError
+         }
+         
+         foo();
+         ```
+
+         ​	- This includes functions inside functions
+
+         ```js
+         function logElements(array) {
+           array.forEach(function(element) {
+             console.log(element);
+           });
+         }
+         
+         logElements([1, 2, 3]);
+         ```
+
+      5. Inner scope variables can **shadow** outer scope variables. 
+
+          - **Variable shadowing** happens when you have a local variable with the same identifier name as the outer scope variable. Since inner scope can access the outer scope, there would be 2 local variables in the inner scope with the same name. The local variable **shadows** the outer scope variable and prevents access to the outer scope local variable, or making any changes to the outer scoped variable. 
+
+            Most identifier names- variables, parameters, function names, or class names - can shadow names from the outer scope. The only names that do not shadow are property names for objects. 
+
+          - Example
+
+            ```js
+            let number = 10;
+            
+            [1, 2, 3].forEach(number => {
+              console.log(number);
+            });
+            // 	console.log(number) will use the parameter number and discard the outer scoped local variable. 
+            ```
+
+            ```js
+            let a = 1;
+            
+            function doit(a) {
+              console.log(a); // => 3
+            }
+            
+            doit(3);
+            console.log(a); // => 1
+            
+            // parameter a is shadowing global variable a. 
+            ```
+
+            
+
+    - **block scope**:  Statements and expressions grouped by opening and closing curly braces `{}`.  `if / else` and `for` and `while` loops define new block scopes. 
+
+      Rules
+
+      1. Outer blocks cannot access variables from inner scopes. 
+      2. Inner blocks can access variables from outer scopes. 
+      3. Variables defined in an inner block can shadow variables from outer scopes. 
+
+      - But not everything between curly braces is a block. Function bodies are not blocks, nor are braces that surround an object literal, but we can treat them like blocks. Blocks that aren't functions bodies are **non**-**function blocks**.
+
+  - **global scope**:  global variables are available across your entire program. You can use them anywhere in the program, either globally or form inside a block. 
 
 ```js
 if (1 === 1) {
@@ -69,7 +174,7 @@ There are 5 primitive data types.
 
 - string
 
-  - Must be enclosed in single, double quotation marks, or string literals.
+  - Data enclosed in single, double quotation marks, or string literals.
 
 - number
 
@@ -111,16 +216,16 @@ There are 5 primitive data types.
   - Boolean is a datatype that returns either true or false.
   - **Double not (!!)** converts an object/variable to a boolean value. !!Bcondition === Bcondition
 
-**Objects**: Objects are comprised of primitive values or other objects. Objects are **mutable:** it has parts that can be altered. 
+**Objects**: Objects are comprised of primitive values or other objects. Objects are **mutable:** If you change something about the the object, all variables that reference that object will also change. 
 
 - simple objects
 - arrays
 - Dates
 - Functions
 
-<u>Neither an Object nor Primitive</u>
+**Neither an Object nor Primitive**
 
-- Anything that isn't data or function is neither a primitive value nor an object. This includes
+- Anything that isn't data or a function is neither a primitive value nor an object. This includes
   - variables and other identifiers such as function names
   - statements such as `if`, `return`, `try`, `while`, and `break`
   - keywords such as `new`, `function`, `let`, `const`, and `class`
@@ -367,8 +472,6 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 - **Mutable**: means a type of variable that can be changed. 
   -  Objects and arrays (which are also objects) are **mutable** -  it has parts that can be altered. 
 - Variables declared using `const` are not necessarily immutable. If you declare an object with `const`, the object's properties can still be changed. However, the variable identifier cannot be reassigned to a different value. 
-  - constants are block scoped, just like variables declared with `let` keyword. 
-  - 
 
 <u>loose and strict equality</u>
 
@@ -390,7 +493,133 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
 <u>passing arguments into and return values out of functions</u>
 
-<u>working with Strings</u>
+- A function has parameters. **parameters** are the names listed in a function's definition.  **Arguments** are the real values passed to and received by a function. 
+
+  - if you pass fewer arguments than the declared arguments to the function,  then the missing values are set to undefined. 
+
+    ```js
+    function foo(x, y, z){
+        //...
+    }
+    foo(1);
+    ```
+
+    ```js
+    function foo(x, y, z){
+        x === 1
+        y === undefined
+        z === undefined
+    }
+    ```
+
+  - You can also pass more arguments like
+
+    ```js
+    foo(1,2,3,4,5,7); // Valid!
+    ```
+
+    Use `arguments.length` to know the amount of parameters supplied. 
+
+    ```js
+    function foo(x, y, z) {
+    	return arguments.length; 
+    }
+    foo(1, 2, 3, 4);
+    ```
+
+- **Return values** are the values a function returns to the function caller when it finishes running, by a **return statement**. 
+
+  - **`return`** statement ends function execution and returns a value to the *function* caller. 
+  - Thus, REMEMBER that `return` exits the "nearest" function. So a return statement inside an array iteration function such as `forEach` or `filter` does not exit the function, because it's ending the execution and returning to the **callback** function. 
+
+<u>working with Strings</u> [reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+- Strings are data enclosed in single, double quotation marks, or string literals.
+
+- String use integer-based index that starts from 0 to represent each character. 
+
+  - You can reference a character using the index. 
+
+- These functions convert data type to string
+
+  - `toString(value)` 
+  - `String(value)` accepts null and undefined
+
+- String literal syntax: string literals are enclosed by backticks (``)
+
+  ```js
+  console.log(`${text}`); // interpolation expression inside string
+  ```
+
+  ```js
+  console.log('newline\n');
+  ```
+
+- String `+` any data type = string
+
+  - When using **binary plus**`+` operator, the general rule is that if one operand is a String and the other operand isn't, then the non-String operand is coerced into a String and concatenated with the String operand.
+
+- String objects, works on string literals. 
+
+  - `String.charAt(index)`: returns a new string based on an index. 
+
+  - `String.concat(str1, str2...)`: concatenates string arguments to the calling string and returns a new string. 
+
+  - `String.endsWith()`: returns boolean (true  / false) on whether a string ends with characters of a specified string. 
+
+    > `str.endsWith(searchString)``
+    >
+    > ``str.endsWith(searchString, length)` 
+
+    ​     Parameters
+
+    - `length` Optional
+
+      If provided, it is used as the length of `str`. Defaults to `str.length`.
+
+  - `String.includes(searchString, position)`: case insensitive search to determine whether a string is found, returns boolean. 
+
+    - Optional parameter: `position`
+
+    The position within the string at which to begin searching for `searchString`. (Defaults to `0`.)
+
+  - `String.indexOf()`: returns the index of the first occurrence of the specified value. Returns -1 if value is not found.
+
+    > `indexOf(searchValue)`
+    > `indexOf(searchValue, fromIndex)`
+
+    - Optional parameter`fromIndex` 
+
+       The integer representing the index at which to start the search. 
+
+       If `fromIndex` is greater than the string's `length`, the returned value IS THE STRING's `length
+
+  - `String.charAt()`: returns new string of the single UTF-16 code at the specified offset into string. 
+
+    > `charAt(index)`
+
+  - `String.slice` 
+
+    > `slice(beginIndex)`
+    > `slice(beginIndex, endIndex)`
+
+    1. If `start > stop`, `slice()` will return the empty string. (`""`)
+    2. If `start` is negative: sets char from end of string. 
+    3. if `stop` is negative: sets stop to `string.length - Math.abs(stop)` (original value), except bounded at 0. Thus, 
+
+  - `String.substring` or `String.substr()`
+
+    > substring(indexStart)
+    > `substring(indexStart, indexEnd)`
+    
+    1. If `start > stop`, then `substring` will swap the 2 arguments.
+    2. If either argument is negative or is `NaN`, it is treated like `0`. 
+    
+  - `String.concat()`: concatenates the string arguments to the calling string and returns a new string. 
+
+    > `concat(str1)`
+    > `concat(str1, str2)`
+    > `concat(str1, str2, ... , strN)`
 
 <u>working with Arrays, especially the iteration methods (`forEach`, `map`, `filter`, and `find`)</u>
 
