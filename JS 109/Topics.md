@@ -396,6 +396,8 @@ undefined >= 1; // false -- becomes NaN >= 1
 - **Mutable**: means a type of variable that can be changed. 
   -  Objects and arrays (which are also objects) are **mutable** -  it has parts that can be altered. 
 - Variables declared using `const` are not necessarily immutable. If you declare an object with `const`, the object's properties can still be changed. However, the variable identifier cannot be reassigned to a different value. 
+  - `Const` prohibits changing what `const` points to, but does not prohibit changing the `const` object properties.
+  - we can't reassign an object declared with `const`, but we can still mutate it (add and change the properties of the object). 
 
 <u>loose and strict equality</u>
 
@@ -706,6 +708,8 @@ Iteration methods
 
   - use `Array.includes()` to see if a value exists in an array. Returns Boolean true/ false. 
 
+  - `Array.concat`: merge two or more arrays. Returns a new array. Doesn't change existing arrays.
+
   - `Array.some()`: returns a Boolean value of whether at least one element in an array passes the testing callback function. Returns true as soon as it finds an element that satisfies the testing function. 
 
   - `Array.every()`: returns a Boolean value of whether all elements in an array satisfies the testing callback function. 
@@ -744,8 +748,6 @@ Iteration methods
     join()
     join(separator)
     ```
-
-    
 
 - Modifying arrays: methods that **mutate the array**
 
@@ -837,29 +839,20 @@ let person = {
 
 <u>working with Objects; accessing keys and values of an Object as arrays</u> [reference](https://launchschool.com/books/javascript/read/objects#whatareobjects)
 
-Iterate over object using for... in loop. 
-
-```js
-let person = {
-  name: 'Bob',
-  age: 30,
-  height: '6 ft'
-};
-
-for (let prop in person) {
-  console.log(person[prop]);
-}                             // => Bob
-                              //    30
-                              //    6 ft
-```
-
-
-
 Access key and values of an Object as an array
 
 - Referencing an out of bounds index, or using a key to access a property that doesn't exist returns `undefined`
   - **`hasOwnProperty`** returns true if the name of the property is one of the calling object's own properties. This would differentiate between a property with `undefined` as its value and one that doesn't exist. 
   - Another way is to use `Object.keys(obj).includes('c')`
+
+- Can access nested objects by chaining operators.
+
+  <img src="https://lh6.googleusercontent.com/aCCqfxI9_EWcw5f6pZonYtVdpff8LYi0daGCHT5tSV1nadKIFQoP7TWUfT4h0cJx1CuGPpDUlu_Rvcbun-kBtn1mkDdum60qKVFiCwzPgNSAtSgtiJS4HCjgcCQUJZttxeQxxdDH" alt="img" style="zoom:50%;" />
+
+  ```js
+  spaceship.nanoelectronics['back-up'].battery 
+  // returns Lithium
+  ```
 
 - We can access an object value using 1) dot notation and 2) bracket notation. 
 
@@ -871,6 +864,7 @@ Access key and values of an Object as an array
 = 37
 ```
 
+- Use chain reference to access nested values. 
 - Use **`delete`** keyword to remove a property from an object. 
 
 ```terminal
@@ -900,15 +894,33 @@ Access key and values of an Object as an array
 
 Working with Objects
 
+- iterate over object with for...in loop
+
+```js
+let person = {
+  name: 'Bob',
+  age: 30,
+  height: '6 ft'
+};
+
+for (let prop in person) {
+  console.log(person[prop]);
+}                             // => Bob
+                              //    30
+                              //    6 ft
+```
+
+- `Object.values(obj)` returns an array of a given object's own enumerable property values, in the same order as that provided by a for...in loop. 
+
 ```js
 let person = { name: 'Bob', age: 30, height: '6ft' };
 let personValues = Object.values(person);
 console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 ```
 
-- `Object.entries` returns an array of nested arrays of the properties. 
-
+- `Object.entries` returns an array of nested arrays of the properties. (nested `[key, value]` pairs). 
 - We can use **`object.freeze`** to freeze the property values of an object, just like arrays. However, also like arrays, this function doesn't freeze nested arrays or objects. 
+  - `Object.freeze` only freezes the object that is passed to it. So nested objects can still be modified. 
 
 ```terminal
 > const MyObj = Object.freeze({ foo: "bar", qux: "xyz" })
@@ -939,9 +951,99 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
 - `Array.slice()` creates a shallow copy of the array. Only the top level array is copied. When the array contains other objects, those objects are shared, not copied. When you mutate a shared object in an array or other collection, it is the shared object you are affecting rather than the collection. 
 
-<u>understand the concepts of *pass-by-reference* and *pass-by-value*</u>
+<u>understand the concepts of *pass-by-reference* and *pass-by-value*</u> [Lesson 2](Pass by Reference vs Pass by Value)
 
-<u>variables as pointers</u>
+- **Pass-by-reference** and **pass-by-value** refer to how *function arguments* are passed and returned. 
+
+  - **Pass by value** means passing a copy of the original variable's value. The original variable retains the same value. 
+
+    - When you return the value, you can returning a new value. 
+    - <u>*A copy of the actual parameter's value*</u> is made in the memory: so the caller and caller have two independent variables with the same value. 
+    - Primitive values are always pass-by-value. Primitive values cannot be permanently altered by any function or operation. 
+    - Passing by value creates new **instances** of the 
+
+  - **Pass by reference** means passing a reference (pointer) of an object variable, rather than the actual value.
+
+    - So if the original object is mutated, any variables that reference the original object also changes. If an object is not mutated, it's not pass-by-value. 
+    - Function is able to change the original object. 
+    - Passing the **pointer**/ reference of an argument to the called function so *<u>a copy of the address of the actual parameter</u>* is made in the memory. 
+
+  - Pass-by-sharing
+
+    - Objects exhibit both pass-by-reference and pass-by-value (*pass- by-sharing*). 
+
+    - Rule: If an operation in a function mutates its object argument, the original object is also mutated. 
+
+    - Methods that mutate callers are called **destructive functions**. 
+
+    - Example
+
+      - `Array.slice()` uses pass-by-sharing because it creates a shallow copy.  It performs pass-by-value on the first level by creating a copy of the values of the original array. But if that array contains nested objects, some nested objects may still be connected to its own original variables and hence  `Array.slice` performs pass-by-reference for those  sub-objects. 
+        - slice() is a **shallow copy** because **<u>certain</u>** sub values are still connected to *their* original variable*s*. If you alter the sub-values, that change will be reflected in the original array. (Not all sub values are connected to original array). 
+      - Reassignment isn't destructive: original array not changed. 
+
+      ```js
+      function addName(arr, name) {
+        arr = arr.concat([name]);
+      }
+      
+      let names = ["bob", "kim"];
+      addName(names, "jim");
+      console.log(names); // => [ 'bob', 'kim', ]
+      // reassignment itself is not destructive. 
+      ```
+
+      - `array.push()` is destructive
+
+      ```js
+      function addNames(arr, name) {
+        arr = arr.push(name); // push returns lengt of new array. 
+        console.log(arr); // arr is now 3, the length of new array. 
+      }
+      
+      let names = ["bob", "kim"];
+      addNames(names, "jim");
+      console.log(names); // => [ 'bob', 'kim', 'jim' ] but names was mutated. 
+      // 
+      ```
+
+<u>variables as pointers</u> [lesson 5](variables as pointers) [Book More Stuff Variables as Pointers](Intro to Javascript) [lesson 4](Collection basics) [lesson 3](easy3)
+
+read the book & lesson 4 & lesson 3. about variables as pointers.
+
+- **Deep copy**: makes a duplicate of every item in an existing array or object.  
+
+  - It creates **completely new instances** of any subarrays or subobjects in the source object. 
+  - All values are copied and disconnected from the original variable.
+
+- **Shallow copy**: only makes a duplicate of the outermost values in an array or object. Shallow copy stores the copy of the original object and references to objects. 
+
+  - **<u>Certain</u>** sub-values are still connected to the original variable. (Not all sub-values in nested array are connected to original variable. ) If you alter the sub-values, that change will be reflected in the original array. 
+
+  ```js
+  let a = ['hi'];
+  let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ] 
+  
+  a = a.push('MUTATE');
+  // a is mutated here. a is also reassigned to 3, the new length of the array. 
+  
+  console.log(b) // [ [ 'hi', 'MUTATE' ], 'bye' ]
+  // Shows that reassignment of sub-value doesn't change original array, because reassignment doesn't ever mutate original object. 
+  
+  // However, a.push() mutates both a & the original variable its connected to, which is b. 
+  ```
+
+  ```js
+  let a = ['hi'];
+  let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ]
+  let c = b.slice(); // c is a shallow copy of b.
+  
+  c.push('random');
+  console.log(b) // // [ [ 'hi', 'MUTATE' ], 'bye' ]
+  // Changing outer array doesn't change original array. 
+  ```
+
+  
 
 <u>console.log vs. return</u>
 

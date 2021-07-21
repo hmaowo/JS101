@@ -155,7 +155,7 @@ undefined
 
 ***<u>Slice() is a shallow copy instead of a deep copy.</u>*** 
 
--  A deep copy means that all of the values of the new variable are copied and **disconnected from the original** variable. A shallow copy means that certain (sub-)values (array in array, or object in array, etc) are **still connected** to the original variable.
+-  A deep copy means that all of the values of the new variable are copied and **disconnected from the original** variable. A shallow copy means that certain (sub-)values (array in array, or object in array, etc) are **still connected** to their original variables.
 - **Deep copy** doesn't reflect changes made to the new/**copied** object in the original object. **Shallow Copy** stores the **copy** of the original object **and** points the references to the objects. 
 
 This becomes important when the copied array contains objects and other arrays as elements. How would you verify that in the node console?
