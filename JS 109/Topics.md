@@ -1,22 +1,8 @@
-**Functions**: are defined with the `function` keyword. 
-
-**Variable**: hold data value and must have a unique identifier name. Variables are declared using `let` or `const` and are initialized to `undefined` unless specified to be initialized to a specific value. 
-
-- constants, function names, etc. 
-
-```js
-let foo = 3;
-function bar(qux) { console.log("hello"); }
-const XYZZY = "abc";
-// Identify the variables
-// foo, bar, quix, XYZZY
-```
-
-<u>declarations, initialization, assignment, and re-assignment</u>
+#### declarations, initialization, assignment, and re-assignment
 
 ##### **Declarations**: 
 
-- Declarations define variables and functions. It defines identifiers for variables and functions. It's a statement that reserves space for a variable or function with a particular name, called identifier.  
+- Declarations define variables and functions. It binds a variable or function to an identifier. It's a statement that reserves space for a variable or function with a particular name, called identifier.  
 - Initialization also occurs during declaration.
 - The preferred way in JS is to use the `let` keyword to declare variables. 
 
@@ -45,13 +31,13 @@ const XYZZY = "abc";
 
 - assigns a new a new value for a variable using the assignment `=` operator. 
 
-<u>variable scope, especially how variables interact with function definitions and blocks</u>
+#### variable scope, especially how variables interact with function definitions and blocks
 
 - Variables have scope, which is where the variable is available in a program. A variable's scope is determined by where its declared. 
 
 - **scope** means the part of the program that can access that variable by name. There are two different types of scope
 
-  - **local scope**: Local scope has two forms: function scope & block scope. 
+  - **local scope**:  Local scope has two forms: function scope & block scope.  **Local Variables** exist within function scope and block scope.
 
     - **function scope**: Functions define a new scope for local variables. 
 
@@ -158,7 +144,10 @@ const XYZZY = "abc";
 
       - But not everything between curly braces is a block. Function bodies are not blocks, nor are braces that surround an object literal, but we can treat them like blocks. Blocks that aren't functions bodies are **non**-**function blocks**.
 
-  - **global scope**:  global variables are available across your entire program. You can use them anywhere in the program, either globally or form inside a block. 
+  - **global scope**: variables declared outside of blocks. 
+  
+    -  global variables are available across your entire program. You can use them anywhere in the program, either globally or from inside a block. 
+    - **Global variables**: are variables not inside functions or blocks. 
 
 ```js
 if (1 === 1) {
@@ -178,7 +167,7 @@ console.log(a);    // => 'bar'
 // a has a braoder scope here than the a variable in the previous example. 
 ```
 
-<u>primitive values, objects, and type coercions</u>
+#### primitive values, objects, and type coercions
 
 **primitive value**: is data that is not an object and has no methods. Primitive values are **immutable** which means that the value doesn't change. If you assign a primitive value to a variable, you can't change the primitive value, you can only reassign the variable to a different value, or use the value in an expression. When using primitive values in operations, they always evaluate to a new value. For example `0 + 0` evaluates to a new value `0`. 
 
@@ -389,7 +378,7 @@ undefined >= 1; // false -- becomes NaN >= 1
 
 **binary**: when operator works with 2 values, **ternary**: operator works with 3 values, **unary**: operator works with one value. 
 
-<u>mutability vs. immutability vs. `const`</u>
+#### mutability vs. immutability vs. `const`
 
 - **Immutable**: means that the data's structure or value cannot be altered. 
   - Primitive values are **immutable**. This means that the value can't be altered. You can only reassign the variable to a different value. When using primitive values in operations, they always evaluate to a new value. For example `0 + 0` evaluates to a new value `0`. 
@@ -399,7 +388,7 @@ undefined >= 1; // false -- becomes NaN >= 1
   - `Const` prohibits changing what `const` points to, but does not prohibit changing the `const` object properties.
   - we can't reassign an object declared with `const`, but we can still mutate it (add and change the properties of the object). 
 
-<u>loose and strict equality</u>
+#### loose and strict equality
 
 **Equality operators**: always evaluates to a `boolean` type. 
 
@@ -417,48 +406,9 @@ undefined >= 1; // false -- becomes NaN >= 1
     - Strings must have same characters in same order. 
     - Booleans must be both true or both false. 
 
-<u>passing arguments into and return values out of functions</u>
+#### working with Strings 
 
-- A function has parameters. **parameters** are the names listed in a function's definition.  **Arguments** are the real values passed to and received by a function. 
-
-  - if you pass fewer arguments than the declared arguments to the function,  then the missing values are set to undefined. 
-
-    ```js
-    function foo(x, y, z){
-        //...
-    }
-    foo(1);
-    ```
-
-    ```js
-    function foo(x, y, z){
-        x === 1
-        y === undefined
-        z === undefined
-    }
-    ```
-
-  - You can also pass more arguments like
-
-    ```js
-    foo(1,2,3,4,5,7); // Valid!
-    ```
-
-    Use `arguments.length` to know the amount of parameters supplied. 
-
-    ```js
-    function foo(x, y, z) {
-    	return arguments.length; 
-    }
-    foo(1, 2, 3, 4);
-    ```
-
-- **Return values** are the values a function returns to the function caller when it finishes running, by a **return statement**. 
-
-  - **`return`** statement ends function execution and returns a value to the *function* caller. 
-  - Thus, REMEMBER that `return` exits the "nearest" function. So a return statement inside an array iteration function such as `forEach` or `filter` does not exit the function, because it's ending the execution and returning to the **callback** function. 
-
-<u>working with Strings</u> [reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+[reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 - Strings are data enclosed in single, double quotation marks, or string literals.
 
@@ -489,133 +439,10 @@ undefined >= 1; // false -- becomes NaN >= 1
 
 - String methods [reference](Lesson 4 String methods)
 
-  - `String.endsWith()`: returns boolean (true  / false) on whether a string ends with characters of a specified string. 
 
-    ```
-    str.endsWith(searchString)
-    str.endsWith(searchString, length) 
-    ```
+#### working with Arrays, especially the iteration methods (`forEach`, `map`, `filter`, and `find`)
 
-    ​     Parameters
-
-    - `length` Optional
-
-      If provided, it is used as the length of `str`. Defaults to `str.length`.
-
-  - `String.includes(searchString, position)`: case insensitive search to determine whether a string is found in the string `includes` was called on, returns boolean. 
-
-    - Optional parameter: `position`
-
-    The position within the string at which to begin searching for `searchString`. (Defaults to `0`.)
-
-  - `String.split()`: separates a string into multiple strings and returns them in an array. 
-
-    ```js
-    split()
-    split(separator)
-    split(separator, limit)
-    ```
-
-  - `String.indexOf()`: returns the index of the first occurrence of the specified value. Returns -1 if value is not found.
-
-    ```
-    indexOf(searchValue)
-    indexOf(searchValue, fromIndex)
-    ```
-
-    - Optional parameter`fromIndex` 
-
-       The integer representing the index at which to start the search. 
-
-       If `fromIndex` is greater than the string's `length`, the returned value IS THE STRING's `length
-
-  - `String.charAt()`: returns the character at the index of the given string.  
-
-    ```
-    charAt(index)
-    ```
-
-  - `String.charChodeAt`: instead of returning the character at a given index, it returns the Unicode code point at the index. 
-
-    ```terminal
-    > 'abcdef'.charCodeAt(1)
-    98
-    ```
-
-    
-
-  - `String.slice` : extracts a section of a string and returns it as a new string. 
-
-    ```
-    slice(beginIndex)
-    slice(beginIndex, endIndex)
-    ```
-
-    1. If `start > stop`, `slice()` will return the empty string. (`""`)
-    2. If `start` is negative: sets char from end of string. 
-    3. if `stop` is negative: sets stop to `string.length - Math.abs(stop)` (original value), except bounded at 0. Thus, 
-
-  - `String.substring` or `String.substr()`: returns the part of the String between start and end indexes. 
-
-    ```
-    substring(indexStart)
-    substring(indexStart, indexEnd)
-    ```
-
-    1. If `start > stop`, then `substring` will swap the 2 arguments.
-    2. If either argument is negative or is `NaN`, it is treated like `0`. 
-
-  - `String.concat()`: concatenates the string arguments to the calling string and returns a new string. 
-
-    ```
-    concat(str1)
-    concat(str1, str2)
-    concat(str1, str2, ... , strN)
-    ```
-
-  - `String.match()` : retrieves the result of matching a string against a regular expression. 
-
-    ```
-    match(regexp)
-    ```
-
-    Parameter is a regular expression object. 
-
-  - `String.padStart()`: pads the current string with another string until resulting string reaches given length. Padding is applied from start of the current string. 
-
-    ```
-    padStart(targetLength)
-    padStart(targetLength, padString)
-    ```
-
-    - Optional Parameter: `padString`
-    - The string to pad the current `str` with. If `padString` is too long to stay with the target length, it will be truncated from   the end. The default value is "". 
-
-  - `String.repeat()`: Returns a new string, comprised of the original string concatenated with a specific number of copies of that string. 
-
-    ```
-    repeat(count)
-    ```
-
-  - `String.replace`(): Returns a new string with some of all matches of a `pattern` replaced by a `replacement`. The `pattern` can be a string or a regular expression, and the `replacement` can be a string or function. If `pattern` is a string, **only the first occurrence** will be replaced. 
-
-    ```
-    replace(regexp, newSubstr)
-    replace(regexp, replacerFunction)
-    
-    replace(substr, newSubstr)
-    replace(substr, replacerFunction)
-    ```
-
-  - `String.toLowerCase()`: Returns new string with calling string converted to lower case. 
-
-  - `String.toUpperCase()`: converts the calling string value to uppercase then returns that value. (Also implicitly converts value to string if it isn't one??)
-
-  - `String.trim()`: removes whitespace from both ends of string.
-
-<u>working with Arrays, especially the iteration methods (`forEach`, `map`, `filter`, and `find`)</u>
-
-Iteration methods
+Iteration methods - Array methods. 
 
 - `Array.forEach()`:  loops through each element in an array and executes an anonymous callback function on that array element. 
 
@@ -700,104 +527,8 @@ Iteration methods
   
   ```
 
-- Some other methods
 
-  - use `Array.findIndex()` to get the *index* of the found element. Returns - 1 if no element passed the test. 
-
-  - use `Array.indexOf(search element, fromIndex)` to get the first index at which the element is found. Returns - 1 if no element is found. 
-
-  - use `Array.includes()` to see if a value exists in an array. Returns Boolean true/ false. 
-
-  - `Array.concat`: merge two or more arrays. Returns a new array. Doesn't change existing arrays.
-
-  - `Array.some()`: returns a Boolean value of whether at least one element in an array passes the testing callback function. Returns true as soon as it finds an element that satisfies the testing function. 
-
-  - `Array.every()`: returns a Boolean value of whether all elements in an array satisfies the testing callback function. 
-
-  - `Array.reduce()`: executes a **reducer** function on each element of an array, resulting in a single output value. It takes two arguments 1) a callback function 2) value that initializes the **accumulator**.
-
-    - If no initial value is given, index starts at 1, and the first element in the array(which is at index 0) is used as the initial `accumulator` value and skipped as `currentValue`. 
-    - Index of reducer function starts from 0 if initial value is provided. Otherwise it starts from index 1. 
-
-    ```js
-    let array = [1, 5, 7, 3].slice(0, 3);
-    arr.reduce((accum, cv) => accum + cv)
-    ```
-
-    ```js
-    // Arrow function
-    reduce((accumulator, currentValue) => { ... } )
-    reduce((accumulator, currentValue, index) => { ... } )
-    reduce((accumulator, currentValue, index, array) => { ... } )
-    reduce((accumulator, currentValue, index, array) => { ... }, initialValue)
-    
-    // Callback function
-    reduce(callbackFn)
-    reduce(callbackFn, initialValue)
-    
-    // Inline callback function
-    reduce(function callbackFn(accumulator, currentValue) { ... })
-    reduce(function callbackFn(accumulator, currentValue, index) { ... })
-    reduce(function callbackFn(accumulator, currentValue, index, array){ ... })
-    reduce(function callbackFn(accumulator, currentValue, index, array) { ... }, initialValue)
-    ```
-
-  - `Array.join()`: returns a new string that has concatenated all the elements in an array, separated by commas or a specified separator string. If the array has only one item, then that item will be returned without using the separator.
-
-    ```js
-    join()
-    join(separator)
-    ```
-
-- Modifying arrays: methods that **mutate the array**
-
-  - `Array.push`: adds one or more elements to the end of an array and returns the new length of the array. 
-
-  - `Array.sort()`: [Reference](Lesson 5 Sorting) sorts elements of an array in place and returns the sorted array. 
-
-    - The `sort` method iterates over the array and passes two elements as argument to the callback function during each iteration. It follows these rules
-
-      - If the callback returns a number less than `0`, place `a` before `b`.
-      - If the callback returns a number greater than `0` place `b` before `a`.
-      - If the callback returns `0`, leave the relative positions of `a` and `b` unchanged.
-
-    - If no compare function is specified, the array elements are converted to strings then sorted based on Unicode code point value. 
-
-      ```js
-      // Functionless
-      sort()
-      
-      // Arrow function
-      sort((firstEl, secondEl) => { ... } )
-      
-      // Compare function
-      sort(compareFn)
-      
-      // Inline compare function
-      sort(function compareFn(firstEl, secondEl) { ... })
-      ```
-
-      ```js
-      array.sort((a, b) => a - b) // sort in ascending order
-      
-      array.sort((a, b) => b - a) // sort in descending order
-      ```
-
-      ```js
-      array.sort((a, b) => {
-        if (a < b) {
-          return -1;
-        } else if (a > b) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }); // sorts in ascending order
-      ```
-
-  - `Array.reverse()`: reverses an array *in place* and returns a reference to the mutated array. The first element becomes the last and the last element becomes the first. 
-
-<u>object properties</u> 
+#### object properties 
 
 [reference](https://docs.google.com/document/d/1Vzp6mfGQQbp7gd8Y0Wfq5k5h704f_yH1Y7nJ4xpGJUI/edit?usp=sharing) [another reference](https://docs.google.com/document/d/17dKDbqq2XgUw4fErXA0iZiUiROTj50loBjYx4quwYYg/edit)
 
@@ -837,7 +568,9 @@ let person = {
 
 - An object literal is composed of comma-separated key-value pairs surrounded by curly braces.
 
-<u>working with Objects; accessing keys and values of an Object as arrays</u> [reference](https://launchschool.com/books/javascript/read/objects#whatareobjects)
+#### working with Objects; accessing keys and values of an Object as arrays
+
+ [reference](https://launchschool.com/books/javascript/read/objects#whatareobjects)
 
 Access key and values of an Object as an array
 
@@ -892,7 +625,7 @@ Access key and values of an Object as an array
 
 - **`Object.values`** returns an array of the values from every own property in an object.  
 
-Working with Objects
+#### Working with Objects
 
 - iterate over object with for...in loop
 
@@ -937,7 +670,9 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
     let copyOfObj = Object.assign({}, obj);
     ```
 
-<u>arrays are objects</u>     [reference][Lesson 5 nested_data_structures]
+#### arrays are objects     
+
+[reference][Lesson 5 nested_data_structures]
 
 - When arrays declared and initialized with `const`, the contents of the array are still modifiable. `Const` merely prohibits the identifier from referencing any other array. 
 
@@ -951,7 +686,54 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
 - `Array.slice()` creates a shallow copy of the array. Only the top level array is copied. When the array contains other objects, those objects are shared, not copied. When you mutate a shared object in an array or other collection, it is the shared object you are affecting rather than the collection. 
 
-<u>understand the concepts of *pass-by-reference* and *pass-by-value*</u> [Lesson 2](Pass by Reference vs Pass by Value)
+#### passing arguments into and return values out of functions
+
+- **Parameters** are the names assigned to a function's arguments; **arguments** are the values that are passed to and received by a function. 
+
+- Variables are not passed to or returned by functions: **values **or **references** are passed. 
+
+- if you pass fewer arguments than the declared arguments to the function,  then the missing values are set to undefined. 
+
+  - **Default parameters** allow parameters to have predetermined value in case there is no argument passed into the function or the argument is `undefined` when called. 
+
+  ```js
+  function foo(x, y, z = 2){
+      //...
+  }
+  foo(1);
+  ```
+
+  ```js
+  function foo(x, y, z){
+      x === 1
+      y === undefined
+      z === 2 // default parameter value. 
+  }
+  ```
+
+- You can also pass more arguments like
+
+  ```js
+  foo(1,2,3,4,5,7); // Valid!
+  ```
+
+  Use `arguments.length` to know the amount of parameters supplied. 
+
+  ```js
+  function foo(x, y, z) {
+  	return arguments.length; 
+  }
+  foo(1, 2, 3, 4);
+  ```
+
+- **Return values** are the values a function returns to the call location when it finishes running, by a **return statement**. 
+
+  - **`return`** statement ends function execution and returns a value to the *function* caller. 
+  - Thus, REMEMBER that `return` exits the "nearest" function. So a return statement inside an array iteration function such as `forEach` or `filter` does not exit the function, because it's ending the execution and returning to the **callback** function. 
+
+#### understand the concepts of *pass-by-reference* and *pass-by-value* 
+
+[Lesson 2](Pass by Reference vs Pass by Value)
 
 - **Pass-by-reference** and **pass-by-value** refer to how *function arguments* are passed and returned. 
 
@@ -962,7 +744,7 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
     - Primitive values are always pass-by-value. Primitive values cannot be permanently altered by any function or operation. 
     - Passing by value creates new **instances** of the 
 
-  - **Pass by reference** means passing a reference (pointer) of an object variable, rather than the actual value.
+  - **Pass by reference** means passing a reference (pointer) of an object, rather than the actual value.
 
     - So if the original object is mutated, any variables that reference the original object also changes. If an object is not mutated, it's not pass-by-value. 
     - Function is able to change the original object. 
@@ -976,9 +758,9 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
     - Methods that mutate callers are called **destructive functions**. 
 
-    - Examples
+    - Rules
 
-      - Reassignment isn't destructive: original array not changed. 
+      - **Reassignment is never destructive**: original array not changed. 
 
       ```js
       function addName(arr, name) {
@@ -1005,86 +787,234 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
       // 
       ```
 
-- `Array.slice()` uses pass-by-sharing because it creates a shallow copy.  It performs pass-by-value on the first level by creating a copy of the values of the original array. But if that array contains nested objects, some nested objects may still be connected to its own original variables and hence  `Array.slice` performs pass-by-reference for those  sub-objects. 
+- `Array.slice()` uses pass-by-sharing because it creates a shallow copy.  It performs pass-by-value on the first level by creating a copy of the values of the original array. But if that array contains nested objects, some nested objects may still be connected to its own original variables and hence  `Array.slice` performs pass-by-reference for those sub-objects. 
 
-  - slice() is a **shallow copy** because **<u>certain</u>** sub values are still connected to *their* original variable*s*. If you alter the sub-values, that change will be reflected in the original array. (Not all sub values are connected to original array). 
-
-  ```js
-  let a = ['hi'];
-  let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ]
-  let c = b.slice(); // c is shallow copy of b.
-  console.log(c); // [ [ 'hi' ], 'bye' ]
-  
-  c.push('random');
-  console.log(b) // // [ [ 'hi'], 'bye' ]
-  c[0] = 1;
-  console.log(b) // [ [ 'hi' ], 'bye' ]
-  // Changing c, the shallow copy array doesn't change original array. You must change the original variable that the sub-value of b is connected to. That original variable is a. 
-  
-  a[0] = ['bye']; // a is now ['bye']
-  console.log(b); // [ [ 'bye' ], 'bye' ]
-  // b is now mutated. 
-  
-  a.push['hi again']
-  console.log(b) // [ [ 'bye', 'hi again' ], 'bye' ]
-  ```
-
-<u>variables as pointers</u> [lesson 5](variables as pointers) [Book More Stuff Variables as Pointers](Intro to Javascript) [lesson 4](Collection basics) [lesson 3](easy3)
-
-read the book & lesson 4 & lesson 3. about variables as pointers.
-
-- **Deep copy**: makes a duplicate of every item in an existing array or object.  
-
-  - It creates **completely new instances** of any subarrays or subobjects in the source object. 
-  - All values are copied and disconnected from the original variable.
-
-- **Shallow copy**: only makes a duplicate of the outermost values in an array or object. Shallow copy stores the copy of the original object and references to objects. 
-
-  - **<u>Certain</u>** sub-values are still connected to the original variable. (Not all sub-values in nested array are connected to original variable. ) If you alter the sub-values, that change will be reflected in the original array. 
+  - slice() is a **shallow copy** because **<u>certain</u>** sub values are still connected to *their* original variable*s*. If you alter the sub-values, that change will be reflected in the original array. 
 
   ```js
   let a = ['hi'];
-  let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ] 
-  
-  a = a.push('MUTATE');
-  // a is mutated here. a is also reassigned to 3, the new length of the array. 
-  
-  console.log(b) // [ [ 'hi', 'MUTATE' ], 'bye' ]
-  // Shows that reassignment of sub-value doesn't change original array, because reassignment doesn't ever mutate original object. 
-  
-  // However, a.push() mutates both a & the original variable its connected to, which is b. 
-  ```
-
-  ```js
-  let a = ['hi'];
-  let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ]
-  let c = b.slice(); // [ [ 'hi' ], 'bye' ]
+  let b = [a, 'bye']
+  let c = b.slice(); // c is a shallow copy of b. 
   
   console.log(c) 
   c.push('random');
-  console.log(b) // // [ [ 'hi', 'MUTATE' ], 'bye' ]
-  // Changing outer array doesn't change original array. 
+  console.log(c) // [ [ 'hi' ], 'bye', 'random' ]
+  console.log(b) // [ [ 'hi' ], 'bye' 
+  // changes made to c's outer array doesn't change original variable (b). The outer aray is pass-by-value. 
+  
+  c = b.slice(); // let's reassign c back to b. 
+  
+  c[0].push(1) // This mutates all the arrays. 
+  console.log(a) // [ 'hi', 1 ]
+  console.log(b) // [ [ 'hi', 1 ], 'bye' ]
+  console.log(c) // [ [ 'hi', 1 ], 'bye' ]
+  
+  c[0] = 'hello';
+  console.log(a) // [ 'hi', 1 ]
+  console.log(b) // [ [ 'hi', 1 ], 'bye' ]
+  console.log(c) // [ 'hello', 'bye' ]
+  
+  // b is not mutated here because c[0] reassigns it's 0th index to 1 instead of a. So a doesn't get changed. Reassignment is never a mutating change.  You must mutate sub-value's original variable (a) in order to mutate b.  Whether you mutate a directly, or mutate a by accessing it through b or c, the change will be reflected in all of the arrays.
+  ```
+
+  > - **Deep copy**: makes a duplicate of every item in an existing array or object.  
+  >   - It creates **completely new instances** of any subarrays or subobjects in the source object. 
+  >   - All values are copied and disconnected from the original variable.
+  >
+  > - **Shallow copy**: only makes a duplicate of the outermost values in an array or object. Shallow copy stores the copy of the original object and references to objects. 
+  >   - **<u>Certain</u>** sub-values are still connected to the original variable. (Not all sub-values in nested array are connected to original variable. ) If you alter the sub-values, that change will be reflected in the original array, and all variables that reference that original array
+
+  
+
+#### Variables as pointers 
+
+[lesson 5](variables as pointers) [Book More Stuff Variables as Pointers](Intro to Javascript) [lesson 4](Collection basics) [lesson 3](easy3)
+
+**Variable** is a name for a specific place in memory. Variables hold data value and must have a unique identifier name. Variables are declared using `let` or `const` and are initialized to `undefined` unless specified to be initialized to a specific value. 
+
+- Variables as **pointer** means that variables point  to / **references** an address place in memory. 
+- **Variables always have unique memory addresses**. Each time you create a **<u>new</u>** variable, JavaScript allocates memory to hold its value. Once the variable is created, it is permanently bound to that  memory location until the variable is discarded. 
+
+Primitive values
+
+- For most **primitive** values, the actual value of the variable is stored the allocated memory address.  
+
+```js
+let count = 1;
+count = 2; // reassigning count means count points to/references same address in the memory but now has a different value.
+```
+
+<img src="https://d186loudes4jlv.cloudfront.net/javascript/images/vars-with-primitive-values.png" alt="Primitive values and variables" style="zoom: 80%;" />
+
+- Variables are independent when they contain primitive values because they point to different memory locations. 
+- if you assign a primitive value to a variable, the value is stored in its own memory location, which is independent of the other memory location.
+
+```js
+> let a = 5
+> let b = a // if you assign a primitive value to a variable, the value is stored in its own memory location, which is independent of the other memory location. 
+> a = 8
+> a
+= 8
+
+> b
+= 5
+// variables that have primitive values store those values at the memory location associated with the variable. 
+```
+
+Object & non-mutating operations
+
+- For **objects, ** variables point to the memory address of the actual object.
+
+  ```js
+  let obj = { a: 1 };
+  obj = { b: 2 };
+  obj.c = 3; // this line mutates the actual object by a new property to the object. 
   ```
 
   
 
-<u>console.log vs. return</u>
+<img src="https://d186loudes4jlv.cloudfront.net/javascript/images/vars-with-objects.png" alt="Objects and variables" style="zoom: 80%;" />
 
-<u>truthiness vs. boolean</u>
+- Varibale`Obj` is always at address 0x1248. The value at this address is a pointer to the actual object. 
 
-<u>function definition and invocation</u>
+  - Even when reassigning `obj` to a different object, `obj` still has same memory address. When reassigning, its the value that changes. And the value is the pointer to the actual object. 
 
-<u>function declarations, function expressions, and arrow functions</u>
+- Two object variables have different memory addresses. But if the two variables reference the same memory location where an object is actually stored, then changing the original object will change the value of the two variables. 
 
-<u>implicit return value of function invocations</u>
+  - ```js
+    let a = {1};
+    let b = a;
+    // a & b have different memory addresses but same "value": same pointer/reference to the object. 
+    ```
 
-<u>first-class functions</u>
+- Two object variables may happen to have the "same value", but they are still independent 
 
-<u>side-effects</u>
+  - ```js
+    let a = {1}; 
+    let b = {1}
+    
+    // a & b have separate memory addresses and different values. The values are separate objects that happen to have the same values. 
+    ```
 
-<u>naming conventions (legal vs idiomatic)</u>
+#### console.log vs. return
 
-- **Idiomatic names**: are names that follow the name conventions in [Naming Conventions section of the JavaScript book](https://launchschool.com/books/javascript/read/preparations#namingconventions)
+#### truthiness vs. boolean
+
+- **true** & **false**  are primitive Boolean values.  
+
+- **truthy**/**falsy**: means an expression or variable evaluated *as* true or false. Non-boolean variables that count as true are truthy. 
+
+  - **truthy**: almost all values evaluate as truthy. 
+  - **falsy** values: 
+    - `false`
+    - `undefined`
+    - `null`
+    - `0`
+    - `" "`(empty string) 
+    - `NaN`
+
+  Truthy or Boolean?
+
+  - **logical operators**: logical operators evaluate an expression that involves 2 subexpressions, then returns what that sub-expression(operand) evaluates to, which is a truthy or falsy value. Unless the operand is Boolean, then logical operator returns a Boolean value. 
+  - **Short-circuit** **operators** are a type of **logical operators**
+    - `&&` stop evaluating when a sub-expression evaluates *as* `false`(falsey)
+    -   `||` stop evaluating when one sub-expression evaluates *as*  `true`(truthy)
+
+#### Function definition and invocation
+
+- **Function**: a reusable block of code that groups together a sequence of statements to perform a specific task. 
+
+  - functions are **defined** with the `function` keyword.
+
+  - **hoisting**: A variable can be used before it has been declared. (allows access to function declarations before they're defined. )
+
+  - **function declaration** binds a function to an identifier, declares the existence of the function. 
+
+    ```js
+    function functionName (parameters) {
+      
+    }
+    // only declares the existence of a function
+    ```
+
+  - **Function expressions**: 
+
+- functions are only executed when they are **invoked**, called upon. 
+
+#### Function declarations, function expressions, and arrow functions
+
+3 ways to define a function
+
+1. **Function declaration** 
+
+   - Function declaration binds a function to an identifier, declares the existence of the function. 
+
+   - Function declarations can't be anonymous. 
+
+   ```js
+   functionName(); // can invoke function before function is declared.  
+   
+   function functionName() {
+     ...
+   }
+   ```
+
+2. **Function expression** 
+
+   - `Function` keyword can be used to define a function inside an expression, or omitted to create anonymous function expressions. 
+   - You can't use function expressions before you create/ declare them. 
+
+   - Any function definition that doesn't have the word `function` at the **<u>beginning</u>** of a statement is a function expression. 
+
+   - Function expressions can be anonymous -> function doesn't have a name if not defined by function keyword. 
+
+     ```js
+     let functionName = function () { // Anonymous function expression
+       ...
+     }; // note the semi colon here! It's an expression so it needs semicolon. 
+     ```
+
+   - Wrapping what looks like a function declaration in parentheses creates a function expression
+
+     ```js
+     // Function expression, not declaration
+     (function greetPeople() {
+       console.log("Good Morning!");
+     }); 
+     ```
+
+     ```js
+     function makeGreeter(name) {
+       return function greeter() {
+         console.log(`Hello ${name}`); 
+       }
+     }
+     // Greeter is a function expression because it starts with return. 
+     ```
+
+3. **Arrow function**
+
+   - Arrow functions are anonymous. 
+
+   ```js
+   let greetPeople = () => console.log("Good Morning!");
+   greetPeople();
+   ```
+
+   - Arrow functions have an interesting feature: **implicit returns**: can omit return statement when function body contains a single expression, on a <u>**single line**</u>. 
+
+#### Implicit return value of function invocations
+
+#### First-class functions
+
+#### Side-effects
+
+#### Naming conventions (legal vs idiomatic)
+
+- **Idiomatic names**: are names that follow the name conventions in [Book: Preparations: Naming Conventions](reference)
+- Naming Conventions
+  - use **camelCase** for variable and function names. 
+  - use **SCREAMING_SNAKE_CASE** to represent constants, which serve as unchanging configuration values in the program. Usually those constants are *magic numbers*. 
 
 | Category                                     | Name              | Notes             |
 | :------------------------------------------- | :---------------- | :---------------- |
@@ -1105,7 +1035,7 @@ read the book & lesson 4 & lesson 3. about variables as pointers.
 |                                              | `HairyCat`        | Local style       |
 |                                              | `ABSOLUTE_PATH`   | Local style       |
 
-- **Legal names**: are names that are syntactically valid, but non-idiomatic. 
+- **Legal names**: are names that are syntactically valid, but non-idiomatic (don't follow naming convention). 
 
 ##### Valid but Non-Idiomatic Names
 
@@ -1137,6 +1067,6 @@ read the book & lesson 4 & lesson 3. about variables as pointers.
 | fizz-buzz  | Hyphen not allowed            |
 | fizz.buzz  | Looks like property reference |
 
-<u>be able to explain what a function does without talking about its implementation; that is, document a function's use and purpose. (See below.)</u>
+#### <u>be able to explain what a function does without talking about its implementation; that is, document a function's use and purpose. (See below.)</u>
 
 ### 
