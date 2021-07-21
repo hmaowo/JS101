@@ -976,10 +976,8 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
 
     - Methods that mutate callers are called **destructive functions**. 
 
-    - Example
+    - Examples
 
-      - `Array.slice()` uses pass-by-sharing because it creates a shallow copy.  It performs pass-by-value on the first level by creating a copy of the values of the original array. But if that array contains nested objects, some nested objects may still be connected to its own original variables and hence  `Array.slice` performs pass-by-reference for those  sub-objects. 
-        - slice() is a **shallow copy** because **<u>certain</u>** sub values are still connected to *their* original variable*s*. If you alter the sub-values, that change will be reflected in the original array. (Not all sub values are connected to original array). 
       - Reassignment isn't destructive: original array not changed. 
 
       ```js
@@ -1006,6 +1004,30 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
       console.log(names); // => [ 'bob', 'kim', 'jim' ] but names was mutated. 
       // 
       ```
+
+- `Array.slice()` uses pass-by-sharing because it creates a shallow copy.  It performs pass-by-value on the first level by creating a copy of the values of the original array. But if that array contains nested objects, some nested objects may still be connected to its own original variables and hence  `Array.slice` performs pass-by-reference for those  sub-objects. 
+
+  - slice() is a **shallow copy** because **<u>certain</u>** sub values are still connected to *their* original variable*s*. If you alter the sub-values, that change will be reflected in the original array. (Not all sub values are connected to original array). 
+
+  ```js
+  let a = ['hi'];
+  let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ]
+  let c = b.slice(); // c is shallow copy of b.
+  console.log(c); // [ [ 'hi' ], 'bye' ]
+  
+  c.push('random');
+  console.log(b) // // [ [ 'hi'], 'bye' ]
+  c[0] = 1;
+  console.log(b) // [ [ 'hi' ], 'bye' ]
+  // Changing c, the shallow copy array doesn't change original array. You must change the original variable that the sub-value of b is connected to. That original variable is a. 
+  
+  a[0] = ['bye']; // a is now ['bye']
+  console.log(b); // [ [ 'bye' ], 'bye' ]
+  // b is now mutated. 
+  
+  a.push['hi again']
+  console.log(b) // [ [ 'bye', 'hi again' ], 'bye' ]
+  ```
 
 <u>variables as pointers</u> [lesson 5](variables as pointers) [Book More Stuff Variables as Pointers](Intro to Javascript) [lesson 4](Collection basics) [lesson 3](easy3)
 
@@ -1036,8 +1058,9 @@ read the book & lesson 4 & lesson 3. about variables as pointers.
   ```js
   let a = ['hi'];
   let b = [a, 'bye']; // [ [ 'hi' ], 'bye' ]
-  let c = b.slice(); // c is a shallow copy of b.
+  let c = b.slice(); // [ [ 'hi' ], 'bye' ]
   
+  console.log(c) 
   c.push('random');
   console.log(b) // // [ [ 'hi', 'MUTATE' ], 'bye' ]
   // Changing outer array doesn't change original array. 
