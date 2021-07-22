@@ -132,7 +132,7 @@ console.log(found);
   ```js
   slice()
   slice(start)
-  slice(start, end)
+  slice(start, end) // end is exclusive
   ```
 
 #### Mutating Methods

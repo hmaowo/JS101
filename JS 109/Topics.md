@@ -1,3 +1,9 @@
+**Method**: Methods are invoked when you prepend a variable name or value followed by period (`.`) to a function invocation. 
+
+```js
+'xyzzy'.toUpperCase()
+```
+
 #### declarations, initialization, assignment, and re-assignment
 
 ##### **Declarations**: 
@@ -451,13 +457,13 @@ Iteration methods - Array methods.
   - forEach() does not mutate the array. 
 
   ```js
-  array.forEach(function(element)) {
+  array.forEach(function(element)) { // anonymous function 
   	...        
-  }
+  });
   
-  array.forEach(element => {
+  array.forEach(element => { // anonymous arrow function
     
-  })
+  });
   ```
 
   ```javascript
@@ -726,9 +732,9 @@ console.log(personValues); // => [ 'Bob', 30, '6ft' ]
   foo(1, 2, 3, 4);
   ```
 
-- **Return values** are the values a function returns to the call location when it finishes running, by a **return statement**. 
+- **Return values** are the values a function returns to the call location when it finishes running. All JavaScript function calls evaluate to a value. By default, the value is `undefined` --> the **implicit return value**. 
 
-  - **`return`** statement ends function execution and returns a value to the *function* caller. 
+  - **`return`** statement ends function execution and returns a specific value to the *function* caller. This is an **explicit return value**. 
   - Thus, REMEMBER that `return` exits the "nearest" function. So a return statement inside an array iteration function such as `forEach` or `filter` does not exit the function, because it's ending the execution and returning to the **callback** function. 
 
 #### understand the concepts of *pass-by-reference* and *pass-by-value* 
@@ -898,6 +904,13 @@ Object & non-mutating operations
 
 #### console.log vs. return
 
+[reference](Intro to JS: Input/ Output section)
+
+- `console.log` is a built-in function that takes any JavaScript value, regardless of type and logs it to the console. (Command line output). 
+  - It works in `node` and most browsers.
+  - It's a function used to print information to the console.  
+- `Return` value is the value that a function returns to the function invocation / calling place  when it finishes executing. The default / implicit return value of most functions is `undefined`. An explicit return value would be what a `return` statement specifies to return. 
+
 #### truthiness vs. boolean
 
 - **true** & **false**  are primitive Boolean values.  
@@ -923,36 +936,24 @@ Object & non-mutating operations
 #### Function definition and invocation
 
 - **Function**: a reusable block of code that groups together a sequence of statements to perform a specific task. 
+  - **Function definition: ** are **defined** with the `function` keyword. 
+    - The 3 ways to define a function are function declaration, function expression, and arrow functions. 
+  - functions are only executed when they are **invoked**, called upon. 
 
-  - functions are **defined** with the `function` keyword.
-
-  - **hoisting**: A variable can be used before it has been declared. (allows access to function declarations before they're defined. )
-
-  - **function declaration** binds a function to an identifier, declares the existence of the function. 
-
-    ```js
-    function functionName (parameters) {
-      
-    }
-    // only declares the existence of a function
-    ```
-
-  - **Function expressions**: 
-
-- functions are only executed when they are **invoked**, called upon. 
 
 #### Function declarations, function expressions, and arrow functions
 
-3 ways to define a function
+3 ways to <u>**define**</u> a function
 
 1. **Function declaration** 
 
    - Function declaration binds a function to an identifier, declares the existence of the function. 
 
-   - Function declarations can't be anonymous. 
+   - Function declarations can't be anonymous.
+   - Function declarations are **hoisted**: can be called before function is defined. 
 
    ```js
-   functionName(); // can invoke function before function is declared.  
+   functionName(); // can invoke function before function is defined.   
    
    function functionName() {
      ...
@@ -962,11 +963,9 @@ Object & non-mutating operations
 2. **Function expression** 
 
    - `Function` keyword can be used to define a function inside an expression, or omitted to create anonymous function expressions. 
-   - You can't use function expressions before you create/ declare them. 
+   - Are not **hoisted** : can't use function expressions before you define them. 
 
-   - Any function definition that doesn't have the word `function` at the **<u>beginning</u>** of a statement is a function expression. 
-
-   - Function expressions can be anonymous -> function doesn't have a name if not defined by function keyword. 
+   - Any function definition that doesn't have the word `function` at the **<u>beginning</u>** of a statement is a function expression. . 
 
      ```js
      let functionName = function () { // Anonymous function expression
@@ -994,20 +993,102 @@ Object & non-mutating operations
 
 3. **Arrow function**
 
-   - Arrow functions are anonymous. 
+   - Arrow functions are always anonymous. 
 
    ```js
-   let greetPeople = () => console.log("Good Morning!");
-   greetPeople();
+   let greetPeople = () => console.log("Good Morning!"); // 0 parameters
+   let greetPeople = paramOne => console.log("Good Morning!"); // 1 parameter,
+   let greetPeople = (paramOne, paramTwo) => console.log("Good Morning!") // 2 parameters
+   
+   greetPeople(); // Must invoke after defining the function. 
    ```
 
    - Arrow functions have an interesting feature: **implicit returns**: can omit return statement when function body contains a single expression, on a <u>**single line**</u>. 
 
+   ```js
+   [1, 2].map(element => return 1 );
+   ```
+
+
+**Anonymous Function**: a function with no name. They are invoked by the variable name. Arrow functions are always anonymous.  
+
+```js
+let name = function (x) { // function expression
+  
+});
+```
+
 #### Implicit return value of function invocations
+
+- **Return values** are the values a function returns to the call location when it finishes running. All JavaScript function calls evaluate to a value. The **implicit return value** of most JavaScript functions is `undefined`. 
+  - Implicit return value is what gets returned if a function invocation doesn't execute a `return` statement. 
+  - Using a `return` statement to return a specific value from a function - the value is the **explicit return value.**
+- Outside of functions, there's no distinction between implicit and explicit return values, but all functions return something unless they raise an exception, even if there is no `return` statement. 
 
 #### First-class functions
 
+- **First-class value** or **First-class object** meet these conditions
+  - Can be assigned to a variable or element of a data structure (such as an array or object)
+  - Can be passed as an argument to a function. 
+  - Can be return as the return value of a function. 
+  - All JavaScript functions are **First-class functions**. First-class function  means the functions are treated like any other variable, and meet the criteria above. 
+
+- **Call back functions**
+  - are first class functions
+  - they are passed as arguments to higher-order functions 
+
+- **Higher order functions**
+  - a function that accepts or returns another function 
+  - a functions that take other functions as arguments and functions that return other functions
+
 #### Side-effects
+
+[reference](Lesson 2 Coding Tips)
+
+A function is said to have **side effects** if it does any of the following:
+
+1. It reassigns any non-local variable. Reassigning a variable in the outer scope would be a side effect.
+2. It mutates the value of any object referenced by a non-local variable. Mutating an array or object argument, for instance, would be a side effect.
+3. It reads from or writes to a file, network connection, browser, or the system hardware. **Side effects like this include writing to the console log and reading input from the terminal.**
+4. It raises an exception without handling it.
+5. It calls another function that has side effects.
+
+The following functions have side effects
+
+```js
+// side effect: logs output to the console
+// returns: undefined
+
+function displayTotal(num1, num2) {
+  console.log(num1 + num2);
+}
+
+// side effect: mutates the passed-in array
+// returns: updated array
+
+function append(targetArr, valueToAppend) {
+  targetArr.push(valueToAppend);
+  return targetArr;
+}
+```
+
+Here's an example of a function with no side effects:
+
+```js
+// side effect: none
+// returns: a new number
+
+function computeTotal(num1, num2) {
+  return num1 + num2;
+}
+```
+
+Most functions should return a *useful value* or they should have a side effect, but not both. 
+
+- In the above examples, `append` both returns a useful value and has a side effect. 
+- If you write functions that do both, you may have trouble remembering one of those -- either you'll forget about the side effect, or you'll forget that there's a return value that you need to examine.
+
+- By "useful value," we mean that the function returns a value that has meaning to the calling code. For instance, a `computeTotal` function should probably return a number that contains the result of adding some numbers together. A function that returns an arbitrary value or that always returns the same value (such as `undefined`) is not usually returning a useful value.
 
 #### Naming conventions (legal vs idiomatic)
 

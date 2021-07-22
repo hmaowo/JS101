@@ -66,9 +66,9 @@
 
 - `String.substring` or `String.substr()`: returns the part of the String between start and end indexes. 
 
-  ```
+  ```javascript
   substring(indexStart)
-  substring(indexStart, indexEnd)
+  substring(indexStart, indexEnd) //index end is exclusive
   ```
 
   1. If `start > stop`, then `substring` will swap the 2 arguments.
